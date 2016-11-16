@@ -13,7 +13,7 @@
 #define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define MainScreenWidth  ([UIScreen mainScreen].bounds.size.width)
 
-@interface RCalendarPickerView : UIView<UICollectionViewDelegate , UICollectionViewDataSource>
+@interface RCalendarPickerView : UIView<UICollectionViewDelegate , UICollectionViewDataSource,UIScrollViewDelegate>
 @property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) NSDate *today;
 @property (nonatomic,copy) void(^calendarBlock)(NSInteger day, NSInteger month, NSInteger year);

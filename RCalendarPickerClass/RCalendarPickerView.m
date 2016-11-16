@@ -10,14 +10,15 @@
 #import "RCollectionViewCell.h"
 
 @interface RCalendarPickerView()
-@property (nonatomic,strong)UIView *headerView;
-@property (nonatomic,strong)UILabel *weekLabel;
-@property (nonatomic,strong)UILabel *monthLabel;
-@property (nonatomic,strong)UILabel *dayLabel;
-@property (nonatomic,strong)UILabel *yearLabel;
-@property (nonatomic,strong)UICollectionView *collectionView;
+@property (nonatomic,strong) UIView *headerView;
+@property (nonatomic,strong) UILabel *weekLabel;
+@property (nonatomic,strong) UILabel *monthLabel;
+@property (nonatomic,strong) UILabel *dayLabel;
+@property (nonatomic,strong) UILabel *yearLabel;
+@property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *weekDayArray;
 @property (nonatomic,strong) NSArray *weekDayTextSupportsArray;
+@property (nonatomic, strong) NSMutableDictionary *cellDic;
 @end
 
 @implementation RCalendarPickerView
@@ -25,23 +26,43 @@
 #pragma mark - init
 - (instancetype)init {
     if (self = [super init]) {
+        self.cellDic = [[NSMutableDictionary alloc] init];
         [self prepareUI];
         [self prepareData];
     }
     return self;
 }
--(void)prepareData{
-    self.weekDayTextSupportsArray = @[@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday"];
-    self.weekDayArray = @[@"日",@"一",@"二",@"三",@"四",@"五",@"六"];
+
+#pragma mark - Layout UI准备和布局相关
+
+-(void)updateHeaderViewDate:(NSDate *)date {
+    
+    int index = (int)[DateHelper firstWeekdayInThisMonth:date] + 1;
+    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[index>6?0:index]];
+    self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
+    self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
+    self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
 }
 -(void)setToday:(NSDate *)today{
     _today = today;
-    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)[DateHelper firstWeekdayInThisMonth:today]+1]];
-    self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:today]];
-    self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:today]];
-    self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:today]];
+    [self updateHeaderViewDate:today];
+}
+- (void)setDate:(NSDate *)date
+{
+    _date = date;
+    _today = date;
+    [self.collectionView reloadData];
 }
 #pragma mark - Layout UI准备和布局相关
+
+-(void)prepareData{
+    
+    
+    self.weekDayTextSupportsArray = @[@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday"];
+    self.weekDayArray = @[@"日",@"一",@"二",@"三",@"四",@"五",@"六"];
+    [self addSwipe];
+}
+
 - (void)prepareUI{
     
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
@@ -91,6 +112,30 @@
     
 };
 
+#pragma -mark click
+- (void)addSwipe
+{
+    UISwipeGestureRecognizer *swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nexAction)];
+    swipLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self addGestureRecognizer:swipLeft];
+    UISwipeGestureRecognizer *swipRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previouseAction)];
+    swipRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self addGestureRecognizer:swipRight];
+}
+
+#pragma -mark click
+- (void)previouseAction {
+    [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionTransitionCurlDown animations:^(void) {
+        self.date = [DateHelper lastMonth:_date];
+    } completion:nil];
+}
+
+- (void)nexAction {
+    [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionTransitionCurlUp animations:^(void) {
+        self.date = [DateHelper nextMonth:_date];
+    } completion:nil];
+}
+
 #pragma -mark collectionView delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -108,7 +153,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     RCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RCollectionViewCell" forIndexPath:indexPath];
+    cell.isSelected = NO;
     if (indexPath.section == 0) {
         
         cell.day = self.weekDayArray[indexPath.row];
@@ -129,8 +176,9 @@
             day = i - firstWeekday + 1;
             cell.day = [NSString stringWithFormat:@"%i",(int)day];
             cell.dayLabelTextColor = RGB16(0x6f6f6f);
-            //this month
+            //this month 当前月
             if ([_today isEqualToDate:_date]) {
+                //当天
                 if (day == [DateHelper day:_date]) {
                     cell.isSelected = YES;
                     cell.dayLabelTextColor = RGB16(0x4898eb);
@@ -179,12 +227,18 @@
     NSInteger day = 0;
     NSInteger i = indexPath.row;
     day = i - firstWeekday + 1;
+    
+    NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day weekday:i == 0 ? 0:(i%7)];
+    [self updateHeaderViewDate:date];
+    // TODO : 这个地方需要优化写法
+    NSLog(@"weekday : %d",(int)(i==0?0:(i%7)));
+    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)(i==0?0:(i%7))]];
     if (self.calendarBlock) {
         self.calendarBlock(day, [comp month], [comp year]);
     }
 }
 
-
+#pragma -mark 懒加载
 -(UIView *)headerView{
     if (!_headerView) {
         _headerView = [[UIView alloc]init];
@@ -246,6 +300,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource  = self;
         [_collectionView registerClass:[RCollectionViewCell class] forCellWithReuseIdentifier:@"RCollectionViewCell"];
+    
     }
     return _collectionView;
 }

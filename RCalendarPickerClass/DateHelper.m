@@ -54,4 +54,15 @@
     return newDate;
 }
 
++ (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day weekday:(NSInteger)weekday {
+
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay |NSCalendarUnitWeekday fromDate:[NSDate date]];
+    dateComponents.year = year;
+    dateComponents.month = month;
+    dateComponents.day = day;
+    dateComponents.weekday = weekday;
+
+    return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+}
+
 @end

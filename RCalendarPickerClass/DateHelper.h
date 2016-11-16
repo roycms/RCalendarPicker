@@ -17,4 +17,5 @@
 +  (NSInteger)totaldaysInMonth:(NSDate *)date;
 +  (NSDate *)lastMonth:(NSDate *)date;
 + (NSDate*)nextMonth:(NSDate *)date;
++ (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day weekday:(NSInteger)weekday;
 @end
