@@ -18,7 +18,9 @@
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray *weekDayArray;
 @property (nonatomic,strong) NSArray *weekDayTextSupportsArray;
-@property (nonatomic, strong) NSMutableDictionary *cellDic;
+@property (nonatomic,strong) UILabel *groundColourMonthLabel;
+
+@property (nonatomic,strong)NSArray *themeArray;
 @end
 
 @implementation RCalendarPickerView
@@ -26,7 +28,6 @@
 #pragma mark - init
 - (instancetype)init {
     if (self = [super init]) {
-        self.cellDic = [[NSMutableDictionary alloc] init];
         [self prepareUI];
         [self prepareData];
     }
@@ -42,6 +43,8 @@
     self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
     self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
+    
+    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
 }
 -(void)setToday:(NSDate *)today{
     _today = today;
@@ -50,16 +53,36 @@
 - (void)setDate:(NSDate *)date
 {
     _date = date;
-    _today = date;
+    int random = (arc4random() % 8);
+    [self.headerView setBackgroundColor:self.themeArray[random]];
+    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     [self.collectionView reloadData];
+}
+
+-(void)hide {
+    [self removeFromSuperview];
 }
 #pragma mark - Layout UI准备和布局相关
 
 -(void)prepareData{
     
-    
-    self.weekDayTextSupportsArray = @[@"Sunday",@"Monday",@"Tuesday",@"Wednesday",@"Thursday",@"Friday",@"Saturday"];
+    self.weekDayTextSupportsArray = @[@"Sunday",
+                                      @"Monday",
+                                      @"Tuesday",
+                                      @"Wednesday",
+                                      @"Thursday",
+                                      @"Friday",
+                                      @"Saturday"];
     self.weekDayArray = @[@"日",@"一",@"二",@"三",@"四",@"五",@"六"];
+    self.themeArray = @[RGB16(0X1abc9c),
+                        RGB16(0X27ae60),
+                        RGB16(0X2980b9),
+                        RGB16(0X2c3e50),
+                        RGB16(0Xf39c12),
+                        RGB16(0Xc0392b),
+                        RGB16(0X7f8c8d),
+                        RGB16(0X8e44ad)];
+
     [self addSwipe];
 }
 
@@ -69,6 +92,8 @@
     
     [self addSubview:self.headerView];
     [self addSubview:self.collectionView];
+    [self addSubview:self.groundColourMonthLabel];
+    
     
     [self.headerView addSubview:self.weekLabel];
     [self.headerView addSubview:self.monthLabel];
@@ -102,6 +127,11 @@
         make.centerX.equalTo(self.headerView);
         make.width.equalTo(self.headerView);
         make.bottom.equalTo(self.headerView).offset(-15);
+    }];
+    [self.groundColourMonthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headerView.mas_bottom).offset(5);
+        make.centerX.equalTo(self);
+        make.width.height.equalTo(self.collectionView);
     }];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,9 +187,8 @@
     RCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RCollectionViewCell" forIndexPath:indexPath];
     cell.isSelected = NO;
     if (indexPath.section == 0) {
-        
         cell.day = self.weekDayArray[indexPath.row];
-        cell.dayLabelTextColor = RGB16(0x15cc9c);
+        cell.dayLabelTextColor = RGB16(0x6f6f6f);
     } else {
         NSInteger daysInThisMonth = [DateHelper totaldaysInMonth:_date];
         NSInteger firstWeekday = [DateHelper firstWeekdayInThisMonth:_date];
@@ -168,25 +197,26 @@
         NSInteger i = indexPath.row;
         
         if (i < firstWeekday) {
-            cell.day = @"";
+            cell.day = nil;
             
         }else if (i > firstWeekday + daysInThisMonth - 1){
-            cell.day = @"";
+            cell.day = nil;
         }else{
             day = i - firstWeekday + 1;
             cell.day = [NSString stringWithFormat:@"%i",(int)day];
-            cell.dayLabelTextColor = RGB16(0x6f6f6f);
+            cell.dayLabelTextColor = RGB16(0x5d5d5d);
             //this month 当前月
+            BOOL isThisMonth = [DateHelper month:_date] == [DateHelper month:[NSDate date]];
             if ([_today isEqualToDate:_date]) {
                 //当天
-                if (day == [DateHelper day:_date] && [DateHelper month:_date] == [DateHelper month:[NSDate date]]) {
+                if (day == [DateHelper day:_date] && isThisMonth) {
                     cell.isSelected = YES;
-                    cell.dayLabelTextColor = RGB16(0x4898eb);
-                } else if (day > [DateHelper day:_date] && [DateHelper month:_date] == [DateHelper month:[NSDate date]]) {
-                    cell.dayLabelTextColor = RGB16(0xcbcbcb);
+                    cell.dayLabelTextColor = RGB16(0xffffff);
+                } else if (day > [DateHelper day:_date] && isThisMonth) {
+                    cell.dayLabelTextColor = RGB16(0x5d5d5d);
                 }
             } else if ([_today compare:_date] == NSOrderedAscending) {
-                cell.dayLabelTextColor = RGB16(0xcbcbcb);
+                cell.dayLabelTextColor = RGB16(0x5d5d5d);
             }
         }
     }
@@ -205,16 +235,7 @@
         if (i >= firstWeekday && i <= firstWeekday + daysInThisMonth - 1) {
             day = i - firstWeekday + 1;
             return YES;
-            //this month
-            //            if ([_today isEqualToDate:_date]) {
-            //                if (day <= [DateHelper day:_date]) {
-            //                    return YES;
-            //                }
-            //            } else if ([_today compare:_date] == NSOrderedDescending) {
-            //                return YES;
-            //            }
         }
-        
     }
     return NO;
 }
@@ -233,8 +254,9 @@
     // TODO : 这个地方需要优化写法
     NSLog(@"weekday : %d",(int)(i==0?0:(i%7)));
     self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)(i==0?0:(i%7))]];
-    if (self.calendarBlock) {
-        self.calendarBlock(day, [comp month], [comp year]);
+    if (self.complete) {
+        self.complete(day, [comp month], [comp year]);
+        //        [self hide];
     }
 }
 
@@ -285,6 +307,17 @@
     return _yearLabel;
 }
 
+-(UILabel *)groundColourMonthLabel{
+    if (!_groundColourMonthLabel) {
+        _groundColourMonthLabel = [[UILabel alloc]init];
+        [_groundColourMonthLabel setFont:[UIFont boldSystemFontOfSize:230]];
+        [_groundColourMonthLabel setTextColor:RGB16(0x000000)];
+        _groundColourMonthLabel.alpha = 0.05;
+        [_groundColourMonthLabel setTextAlignment:NSTextAlignmentCenter];
+    }
+    return _groundColourMonthLabel;
+}
+
 -(UICollectionView *)collectionView {
     
     if (!_collectionView) {
@@ -300,7 +333,7 @@
         _collectionView.delegate = self;
         _collectionView.dataSource  = self;
         [_collectionView registerClass:[RCollectionViewCell class] forCellWithReuseIdentifier:@"RCollectionViewCell"];
-    
+        
     }
     return _collectionView;
 }

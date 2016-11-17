@@ -16,6 +16,7 @@
 @interface RCalendarPickerView : UIView<UICollectionViewDelegate , UICollectionViewDataSource,UIScrollViewDelegate>
 @property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) NSDate *today;
-@property (nonatomic,copy) void(^calendarBlock)(NSInteger day, NSInteger month, NSInteger year);
+@property (nonatomic,copy) void(^complete)(NSInteger day, NSInteger month, NSInteger year);
 
+-(void)hide;
 @end
