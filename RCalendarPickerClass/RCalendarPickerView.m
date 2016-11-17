@@ -179,10 +179,10 @@
             //this month 当前月
             if ([_today isEqualToDate:_date]) {
                 //当天
-                if (day == [DateHelper day:_date]) {
+                if (day == [DateHelper day:_date] && [DateHelper month:_date] == [DateHelper month:[NSDate date]]) {
                     cell.isSelected = YES;
                     cell.dayLabelTextColor = RGB16(0x4898eb);
-                } else if (day > [DateHelper day:_date]) {
+                } else if (day > [DateHelper day:_date] && [DateHelper month:_date] == [DateHelper month:[NSDate date]]) {
                     cell.dayLabelTextColor = RGB16(0xcbcbcb);
                 }
             } else if ([_today compare:_date] == NSOrderedAscending) {
