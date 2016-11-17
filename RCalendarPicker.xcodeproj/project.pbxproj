@@ -19,6 +19,7 @@
 		B038DFD21DDC017900219F1F /* RCalendarPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD11DDC017900219F1F /* RCalendarPickerView.m */; };
 		B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD41DDC039000219F1F /* RCollectionViewCell.m */; };
 		B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD71DDC0CE600219F1F /* DateHelper.m */; };
+		B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */ = {isa = PBXBuildFile; fileRef = B05CB9C91DDD404900821BB3 /* Preview.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		B038DFD41DDC039000219F1F /* RCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCollectionViewCell.m; sourceTree = "<group>"; };
 		B038DFD61DDC0CE600219F1F /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		B038DFD71DDC0CE600219F1F /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		B05CB9C91DDD404900821BB3 /* Preview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Preview.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		B038DF9A1DDBF12900219F1F /* RCalendarPicker */ = {
 			isa = PBXGroup;
 			children = (
+				B05CB9C81DDD404900821BB3 /* Resource */,
 				B038DF9E1DDBF12900219F1F /* AppDelegate.h */,
 				B038DF9F1DDBF12900219F1F /* AppDelegate.m */,
 				B038DFA11DDBF12900219F1F /* ViewController.h */,
@@ -185,6 +188,14 @@
 				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
 			);
 			path = RCalendarPickerClass;
+			sourceTree = "<group>";
+		};
+		B05CB9C81DDD404900821BB3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B05CB9C91DDD404900821BB3 /* Preview.gif */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +268,7 @@
 				TargetAttributes = {
 					B038DF971DDBF12900219F1F = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8N7N7WZT8J;
 						ProvisioningStyle = Automatic;
 					};
 					B038DFB01DDBF12900219F1F = {
@@ -297,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B038DFAB1DDBF12900219F1F /* LaunchScreen.storyboard in Resources */,
+				B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */,
 				B038DFA81DDBF12900219F1F /* Assets.xcassets in Resources */,
 				B038DFA61DDBF12900219F1F /* Main.storyboard in Resources */,
 			);
@@ -524,6 +537,7 @@
 			baseConfigurationReference = 5B9A931BF5FB2EF330FCC220 /* Pods-RCalendarPicker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8N7N7WZT8J;
 				INFOPLIST_FILE = RCalendarPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.roycms.RCalendarPicker;
@@ -536,6 +550,7 @@
 			baseConfigurationReference = 9A98DB3FC050F6BA34F1F429 /* Pods-RCalendarPicker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8N7N7WZT8J;
 				INFOPLIST_FILE = RCalendarPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.roycms.RCalendarPicker;
