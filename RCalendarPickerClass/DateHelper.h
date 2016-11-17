@@ -91,4 +91,36 @@
  @return 返回 NSDate
  */
 + (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
+
+/**
+ 返回农历的月
+
+ @param date date description
+ @return return value description
+ */
++ (NSString*)getChineseCalendarMonthsWithDate:(NSDate *)date;
+
+/**
+ 返回农历的天
+
+ @param date date description
+ @return return value description
+ */
++ (NSString*)getChineseCalendarDaysWithDate:(NSDate *)date;
+
+/**
+ 返回农历的年
+
+ @param date date description
+ @return return value description
+ */
++ (NSString*)getChineseCalendarYearsWithDate:(NSDate *)date;
+
+/**
+ 返回农历的全部  例子 甲子 十一月 初三
+
+ @param date date description
+ @return return value description
+ */
++ (NSString*)getChineseCalendarWithDate:(NSDate *)date;
 @end
