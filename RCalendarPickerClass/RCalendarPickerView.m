@@ -19,8 +19,9 @@
 @property (nonatomic,strong) NSArray *weekDayArray;
 @property (nonatomic,strong) NSArray *weekDayTextSupportsArray;
 @property (nonatomic,strong) UILabel *groundColourMonthLabel;
-
 @property (nonatomic,strong)NSArray *themeArray;
+@property (nonatomic,strong)NSDate *selectDate;
+@property (nonatomic,assign)UIColor *thisTheme;
 @end
 
 @implementation RCalendarPickerView
@@ -30,31 +31,31 @@
     if (self = [super init]) {
         [self prepareUI];
         [self prepareData];
+        [self prepareSwipe]; // 添加滑动翻页事件
     }
     return self;
 }
 
-#pragma mark - Layout UI准备和布局相关
+#pragma mark - pu t
 
 -(void)updateHeaderViewDate:(NSDate *)date {
     
-    int index = (int)[DateHelper firstWeekdayInThisMonth:date] + 1;
-    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[index>6?0:index]];
+    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)[DateHelper weekday:date] - 1]];
     self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
     self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
-    
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
 }
 -(void)setToday:(NSDate *)today{
+    
     _today = today;
     [self updateHeaderViewDate:today];
 }
 - (void)setDate:(NSDate *)date
 {
     _date = date;
-    int random = (arc4random() % 8);
-    [self.headerView setBackgroundColor:self.themeArray[random]];
+    self.thisTheme = self.themeArray[(arc4random() % 8)];
+    [self.headerView setBackgroundColor:self.thisTheme];
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     [self.collectionView reloadData];
 }
@@ -73,7 +74,14 @@
                                       @"Thursday",
                                       @"Friday",
                                       @"Saturday"];
-    self.weekDayArray = @[@"日",@"一",@"二",@"三",@"四",@"五",@"六"];
+    self.weekDayArray = @[@"日",
+                          @"一",
+                          @"二",
+                          @"三",
+                          @"四",
+                          @"五",
+                          @"六"];
+    
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
                         RGB16(0X2980b9),
@@ -82,8 +90,6 @@
                         RGB16(0Xc0392b),
                         RGB16(0X7f8c8d),
                         RGB16(0X8e44ad)];
-
-    [self addSwipe];
 }
 
 - (void)prepareUI{
@@ -143,7 +149,7 @@
 };
 
 #pragma -mark click
-- (void)addSwipe
+- (void)prepareSwipe
 {
     UISwipeGestureRecognizer *swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nexAction)];
     swipLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -186,6 +192,8 @@
     
     RCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RCollectionViewCell" forIndexPath:indexPath];
     cell.isSelected = NO;
+    cell.isToDay = NO;
+    cell.bgViewColor = self.thisTheme;
     if (indexPath.section == 0) {
         cell.day = self.weekDayArray[indexPath.row];
         cell.dayLabelTextColor = RGB16(0x6f6f6f);
@@ -205,19 +213,21 @@
             day = i - firstWeekday + 1;
             cell.day = [NSString stringWithFormat:@"%i",(int)day];
             cell.dayLabelTextColor = RGB16(0x5d5d5d);
-            //this month 当前月
+            //this month 当前月 当前天
             BOOL isThisMonth = [DateHelper month:_date] == [DateHelper month:[NSDate date]];
-            if ([_today isEqualToDate:_date]) {
-                //当天
-                if (day == [DateHelper day:_date] && isThisMonth) {
-                    cell.isSelected = YES;
-                    cell.dayLabelTextColor = RGB16(0xffffff);
-                } else if (day > [DateHelper day:_date] && isThisMonth) {
-                    cell.dayLabelTextColor = RGB16(0x5d5d5d);
-                }
-            } else if ([_today compare:_date] == NSOrderedAscending) {
-                cell.dayLabelTextColor = RGB16(0x5d5d5d);
+            if (day == [DateHelper day:_date] && isThisMonth) {
+                cell.isToDay = YES;
+                cell.dayLabelTextColor = RGB16(0xffffff);
             }
+            //选择的天
+            if(self.selectDate != nil && day == [DateHelper day:self.selectDate] && [DateHelper month:self.date] == [DateHelper month:self.selectDate])
+            {
+                cell.isSelected = YES;
+            }
+//            if ([_today isEqualToDate:_date]) {
+//            } else if ([_today compare:_date] == NSOrderedAscending) {
+//                cell.dayLabelTextColor = RGB16(0x5d5d5d);
+//            }
         }
     }
     return cell;
@@ -249,15 +259,14 @@
     NSInteger i = indexPath.row;
     day = i - firstWeekday + 1;
     
-    NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day weekday:i == 0 ? 0:(i%7)];
+    NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day];
+    self.selectDate = date;
     [self updateHeaderViewDate:date];
-    // TODO : 这个地方需要优化写法
-    NSLog(@"weekday : %d",(int)(i==0?0:(i%7)));
-    self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)(i==0?0:(i%7))]];
+    [self.collectionView reloadData];
     if (self.complete) {
         self.complete(day, [comp month], [comp year]);
-        //        [self hide];
     }
+    // [self hide]; //选择后是否关闭日历
 }
 
 #pragma -mark 懒加载

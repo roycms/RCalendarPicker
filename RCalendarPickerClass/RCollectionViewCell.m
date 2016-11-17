@@ -34,6 +34,15 @@
 
 -(void)setIsSelected:(BOOL)isSelected{
     self.bgView.hidden = !isSelected;
+    self.bgView.alpha = 0.42;
+}
+-(void)setIsToDay:(BOOL)isToDay{
+    self.bgView.hidden = !isToDay;
+    self.bgView.alpha = 1;
+}
+
+-(void)setBgViewColor:(UIColor *)bgViewColor{
+    [_bgView setBackgroundColor:bgViewColor];
 }
 
 -(void)setDayLabelTextColor:(UIColor *)dayLabelTextColor{

@@ -23,9 +23,13 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     return [components year];
 }
++  (NSInteger)weekday:(NSDate *)date{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:date];
+    return [components weekday];
+}
 +  (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setFirstWeekday:1];//1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
+    [calendar setFirstWeekday:1]; //1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.
     NSDateComponents *comp = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
     [comp setDay:1];
     NSDate *firstDayOfMonthDate = [calendar dateFromComponents:comp];
@@ -54,13 +58,12 @@
     return newDate;
 }
 
-+ (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day weekday:(NSInteger)weekday {
++ (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day {
 
-    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay |NSCalendarUnitWeekday fromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
     dateComponents.year = year;
     dateComponents.month = month;
     dateComponents.day = day;
-    dateComponents.weekday = weekday;
 
     return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
 }
