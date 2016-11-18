@@ -27,8 +27,8 @@
 @implementation RCalendarPickerView
 
 #pragma mark - init
-- (instancetype)init {
-    if (self = [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         [self prepareUI];
         [self prepareData];
         [self prepareSwipe]; // 添加滑动翻页事件
@@ -116,7 +116,7 @@
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(60);
         make.centerX.equalTo(self);
-        make.width.offset(MainScreenWidth * 0.82);
+        make.width.offset(self.frame.size.width * 0.82);
     }];
     
     [self.weekLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -150,7 +150,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headerView.mas_bottom);
         make.centerX.equalTo(self);
-        make.width.height.offset(MainScreenWidth * 0.82);
+        make.width.height.offset(self.frame.size.width * 0.82);
     }];
     
 };
@@ -348,7 +348,7 @@
     
     if (!_collectionView) {
         
-        CGFloat size = MainScreenWidth * 0.82;
+        CGFloat size = self.frame.size.width * 0.82;
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         layout.itemSize = CGSizeMake(size/7, size/7);

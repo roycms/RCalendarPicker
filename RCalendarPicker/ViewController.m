@@ -18,15 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
-    
+    RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
     [self.view addSubview:calendarPicker];
     calendarPicker.isZn = YES; //开启农历
     calendarPicker.today = [NSDate date];
     calendarPicker.date = calendarPicker.today;
-    calendarPicker.frame = CGRectMake(0, 0, MainScreenWidth, MainScreenHeight);
     calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
-        NSLog(@"%i-%i-%i", (int)year,(int)month,(int)day);
+        NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
     };
     
 }
