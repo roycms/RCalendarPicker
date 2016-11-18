@@ -41,10 +41,17 @@
 -(void)updateHeaderViewDate:(NSDate *)date {
     
     self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)[DateHelper weekday:date] - 1]];
-    self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
-    self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
+    
+    if (self.isZn) {
+        self.monthLabel.text = [NSString stringWithFormat:@"%d月 %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date]];
+        self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
+    }
+    else{
+        self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
+        self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
+    }
 }
 -(void)setToday:(NSDate *)today{
     
@@ -197,6 +204,7 @@
     if (indexPath.section == 0) {
         cell.day = self.weekDayArray[indexPath.row];
         cell.dayLabelTextColor = RGB16(0x6f6f6f);
+        cell.znDay = nil;
     } else {
         NSInteger daysInThisMonth = [DateHelper totaldaysInMonth:_date];
         NSInteger firstWeekday = [DateHelper firstWeekdayInThisMonth:_date];
@@ -206,12 +214,21 @@
         
         if (i < firstWeekday) {
             cell.day = nil;
+            cell.znDay = nil;
             
         }else if (i > firstWeekday + daysInThisMonth - 1){
             cell.day = nil;
+            cell.znDay = nil;
         }else{
             day = i - firstWeekday + 1;
             cell.day = [NSString stringWithFormat:@"%i",(int)day];
+            
+            NSDateComponents *comp = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:_date];
+            NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day];
+            
+            if (self.isZn) {
+                 cell.znDay = [DateHelper getChineseCalendarDaysWithDate:date];
+            }
             cell.dayLabelTextColor = RGB16(0x5d5d5d);
             //this month 当前月 当前天
             BOOL isThisMonth = [DateHelper month:_date] == [DateHelper month:[NSDate date]];
@@ -264,7 +281,7 @@
     [self updateHeaderViewDate:date];
     [self.collectionView reloadData];
     if (self.complete) {
-        self.complete(day, [comp month], [comp year]);
+        self.complete(day, [comp month], [comp year] ,date);
     }
     // [self hide]; //选择后是否关闭日历
 }

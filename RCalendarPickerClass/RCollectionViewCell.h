@@ -12,6 +12,7 @@
 
 @interface RCollectionViewCell : UICollectionViewCell
 @property (nonatomic,strong)NSString *day;
+@property (nonatomic,strong)NSString *znDay;
 @property (nonatomic, assign)BOOL isSelected;
 @property (nonatomic, assign)BOOL isToDay;
 @property (nonatomic, assign)UIColor *dayLabelTextColor;

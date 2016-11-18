@@ -10,13 +10,15 @@
 #import "Masonry.h"
 #import "RRGB.h"
 #import "DateHelper.h"
+
 #define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define MainScreenWidth  ([UIScreen mainScreen].bounds.size.width)
 
 @interface RCalendarPickerView : UIView<UICollectionViewDelegate , UICollectionViewDataSource,UIScrollViewDelegate>
 @property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) NSDate *today;
-@property (nonatomic,copy) void(^complete)(NSInteger day, NSInteger month, NSInteger year);
+@property (nonatomic,assign) BOOL isZn;
+@property (nonatomic,copy) void(^complete)(NSInteger day, NSInteger month, NSInteger year ,NSDate *date);
 
 -(void)hide;
 @end

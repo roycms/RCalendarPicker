@@ -21,11 +21,11 @@
     RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
     
     [self.view addSubview:calendarPicker];
+    calendarPicker.isZn = YES; //开启农历
     calendarPicker.today = [NSDate date];
     calendarPicker.date = calendarPicker.today;
     calendarPicker.frame = CGRectMake(0, 0, MainScreenWidth, MainScreenHeight);
-    calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year){
-        
+    calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
         NSLog(@"%i-%i-%i", (int)year,(int)month,(int)day);
     };
     

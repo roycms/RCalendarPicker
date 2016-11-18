@@ -13,6 +13,7 @@
 @interface RCollectionViewCell()
 @property (nonatomic ,strong)UIView *bgView;
 @property (nonatomic ,strong) UILabel *dayLabel;
+@property (nonatomic ,strong) UILabel *znDayLabel;
 @end
 @implementation RCollectionViewCell
 
@@ -26,12 +27,21 @@
 -(void)prepareUI{
     [self.contentView addSubview:self.bgView];
     [self.contentView addSubview:self.dayLabel];
+    [self.contentView addSubview:self.znDayLabel];
+    
+    [self.znDayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.dayLabel).offset(-1);
+        make.centerX.equalTo(self.dayLabel);
+    }];
 }
 
 -(void)setDay:(NSString *)day{
     self.dayLabel.text = day;
 }
 
+-(void)setZnDay:(NSString *)znDay{
+    self.znDayLabel.text = znDay;
+}
 -(void)setIsSelected:(BOOL)isSelected{
     self.bgView.hidden = !isSelected;
     self.bgView.alpha = 0.42;
@@ -67,5 +77,15 @@
         [_dayLabel setFont:[UIFont boldSystemFontOfSize:17]];
     }
     return _dayLabel;
+}
+- (UILabel *)znDayLabel
+{
+    if (!_znDayLabel) {
+        _znDayLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        [_znDayLabel setTextAlignment:NSTextAlignmentCenter];
+        [_znDayLabel setTextColor:RGB16(0xB3B3B3)];
+        [_znDayLabel setFont:[UIFont boldSystemFontOfSize:10]];
+    }
+    return _znDayLabel;
 }
 @end
