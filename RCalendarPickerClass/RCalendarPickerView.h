@@ -15,10 +15,30 @@
 #define MainScreenWidth  ([UIScreen mainScreen].bounds.size.width)
 
 @interface RCalendarPickerView : UIView<UICollectionViewDelegate , UICollectionViewDataSource,UIScrollViewDelegate>
+
+/**
+ 选中时间
+ */
 @property (nonatomic,strong) NSDate *date;
+
+/**
+ 今天
+ */
 @property (nonatomic,strong) NSDate *today;
+
+/**
+ 是否开启农历
+ */
 @property (nonatomic,assign) BOOL isZn;
+
+/**
+ 选择日历时间成功后 complete block
+ */
 @property (nonatomic,copy) void(^complete)(NSInteger day, NSInteger month, NSInteger year ,NSDate *date);
 
+/**
+ 关闭 销毁日历
+ */
 -(void)hide;
+
 @end
