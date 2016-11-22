@@ -21,3 +21,9 @@ note: MainScreenWidth = 360  MainScreenHeight = 960
     };
 ```
 
+# TODO
+
+* 增加时分秒的选择功能
+* 增加国际化语言支持
+* 增加选择年月的切换形式
+
