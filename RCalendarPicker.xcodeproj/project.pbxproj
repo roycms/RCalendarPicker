@@ -20,6 +20,7 @@
 		B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD41DDC039000219F1F /* RCollectionViewCell.m */; };
 		B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD71DDC0CE600219F1F /* DateHelper.m */; };
 		B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */ = {isa = PBXBuildFile; fileRef = B05CB9C91DDD404900821BB3 /* Preview.gif */; };
+		B0A4D48A1DDEFEB2006CAE8C /* RClockPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		B038DFD61DDC0CE600219F1F /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		B038DFD71DDC0CE600219F1F /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
 		B05CB9C91DDD404900821BB3 /* Preview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Preview.gif; sourceTree = "<group>"; };
+		B0A4D4881DDEFEB2006CAE8C /* RClockPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RClockPickerView.h; sourceTree = "<group>"; };
+		B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RClockPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,8 @@
 				B038DFD41DDC039000219F1F /* RCollectionViewCell.m */,
 				B038DFD61DDC0CE600219F1F /* DateHelper.h */,
 				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
+				B0A4D4881DDEFEB2006CAE8C /* RClockPickerView.h */,
+				B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */,
 			);
 			path = RCalendarPickerClass;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */,
 				B038DFD21DDC017900219F1F /* RCalendarPickerView.m in Sources */,
 				B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */,
+				B0A4D48A1DDEFEB2006CAE8C /* RClockPickerView.m in Sources */,
 				B038DF9D1DDBF12900219F1F /* main.m in Sources */,
 				B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */,
 			);

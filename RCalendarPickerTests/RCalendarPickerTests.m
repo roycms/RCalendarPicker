@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-
+#import "DateHelper.h"
 @interface RCalendarPickerTests : XCTestCase
 
 @end
@@ -27,6 +27,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    XCTAssertEqual((int)[DateHelper day:[NSDate date]],21, @"ok ");
 }
 
 - (void)testPerformanceExample {

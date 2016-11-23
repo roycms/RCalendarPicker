@@ -27,6 +27,14 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:date];
     return [components weekday];
 }
++  (NSInteger)hours:(NSDate *)date{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |NSCalendarUnitHour |NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:date];
+    return [components hour];
+}
++  (NSInteger)minute:(NSDate *)date{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |NSCalendarUnitHour |NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:date];
+    return [components minute];
+}
 +  (NSInteger)firstWeekdayInThisMonth:(NSDate *)date{
     NSCalendar *calendar = [NSCalendar currentCalendar];
     [calendar setFirstWeekday:1]; //1.Sun. 2.Mon. 3.Thes. 4.Wed. 5.Thur. 6.Fri. 7.Sat.

@@ -19,9 +19,9 @@
 @property (nonatomic,strong) NSArray *weekDayArray;
 @property (nonatomic,strong) NSArray *weekDayTextSupportsArray;
 @property (nonatomic,strong) UILabel *groundColourMonthLabel;
-@property (nonatomic,strong)NSArray *themeArray;
-@property (nonatomic,strong)NSDate *selectDate;
-@property (nonatomic,assign)UIColor *thisTheme;
+@property (nonatomic,strong) NSArray *themeArray;
+@property (nonatomic,strong) NSDate *selectDate;
+@property (nonatomic,assign) UIColor *thisTheme;
 @end
 
 @implementation RCalendarPickerView

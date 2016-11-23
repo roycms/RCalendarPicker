@@ -41,6 +41,9 @@
  @return return value description
  */
 +  (NSInteger)weekday:(NSDate *)date;
+
++  (NSInteger)hours:(NSDate *)date;
++  (NSInteger)minute:(NSDate *)date;
 /**
  Description
 
