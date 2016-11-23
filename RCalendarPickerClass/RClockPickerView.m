@@ -400,7 +400,9 @@
          [self hide];
     }
 }
-
+-(void)cancelButtonAction{
+    [self hide];
+}
 -(void)hide {
     [self removeFromSuperview];
 }
@@ -500,6 +502,8 @@
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelButtonAction)];
+        [_cancelButton addGestureRecognizer:tapGesture];
     }
     return _cancelButton;
 }
