@@ -11,17 +11,13 @@
 
 @interface RClockPickerView()
 
-@property (nonatomic)CGPoint centers; //中心点
 @property (nonatomic)CGFloat clockRadius;//表 半径
 @property (nonatomic)CGFloat clockCalibrationRadius;//刻度 半径
-@property (nonatomic)CGFloat hoursLength;//时针 长度
-@property (nonatomic)CGFloat minutesLength;//分针长度
 
-@property (nonatomic,strong)UIView *headerView;
-@property (nonatomic,strong)UILabel *hoursLabel;
-@property (nonatomic,strong)UILabel *minutesLabel;
-@property (nonatomic,strong)UILabel *semicolonLabel;//时 分 的:分隔符
-
+@property (nonatomic,strong)UIView *headerView; //头部view
+@property (nonatomic,strong)UILabel *hoursLabel; //时 Label
+@property (nonatomic,strong)UILabel *minutesLabel;//分 Label
+@property (nonatomic,strong)UILabel *semicolonLabel;//时 分 的“:”分隔符
 @property (nonatomic,strong)UILabel *morningLabel;//上午
 @property (nonatomic,strong)UILabel *afternoonLabel;//下午
 
@@ -32,11 +28,11 @@
 @property (nonatomic,assign)BOOL selectedDate; // true 小时  false 分钟
 @property (nonatomic,assign)BOOL selectedMorningOrafternoon; // true Morning  false afternoon
 
-@property (nonatomic,assign)int selectHours;
-@property (nonatomic,assign)int selectMinutes;
+@property (nonatomic,assign)int selectHours; //当前选择的 小时
+@property (nonatomic,assign)int selectMinutes; //当前选择的 分钟
 
-@property CAShapeLayer *hoursLayer; //时针 Layer
-@property CAShapeLayer *minutesLayer; //分针 Layer
+@property (nonatomic,assign)CGFloat minutes;
+@property (nonatomic,assign)CGFloat seconds;
 
 @end
 @implementation RClockPickerView
@@ -47,19 +43,12 @@
         
         _clockRadius = 140;//表 半径
         _clockCalibrationRadius = 130;//刻度 半径
-        _hoursLength = 60;//时针 长度
-        _minutesLength = 80;//分针长度
         
         [self prepareUI];
         [self drawPointer];
         [self drawClockCenterLayer];
         
-        self.selectedDate = YES; //默认选中小时
-        self.minutesLabel.alpha = 0.6;
-        
-        self.selectedMorningOrafternoon = YES;
-        self.afternoonLabel.alpha = 0.6;
-        
+        [self prepareData];
     }
     return self;
 }
@@ -67,50 +56,59 @@
 - (instancetype)initWithFrame:(CGRect)frame
                   clockRadius:(CGFloat)clockRadius
        clockCalibrationRadius:(CGFloat)clockCalibrationRadius
-                  hoursLength:(CGFloat)hoursLength
-                minutesLength:(CGFloat)minutesLength
 
 {
     if (self = [super initWithFrame:frame]) {
         
         _clockRadius = clockRadius; //表 半径
         _clockCalibrationRadius = clockCalibrationRadius; //刻度 半径
-        _hoursLength = hoursLength; //时针 长度
-        _minutesLength = minutesLength; //分针长度
         
         [self prepareUI];
         [self drawPointer];
         [self drawClockCenterLayer];
         
-        self.selectedDate = YES; //默认选中小时
-        self.minutesLabel.alpha = 0.6;
-        
-        self.selectedMorningOrafternoon = YES;
-        self.afternoonLabel.alpha = 0.6;
-        
+        [self prepareData];
     }
     return self;
 }
 
 #pragma mark - set
--(void)setHours:(CGFloat)hours{
-    _hours = hours;
-    _selectHours = hours;
-    self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)_hours];
+-(void)setDate:(NSDate *)date{
+    _date = date;
+    NSInteger hours = [DateHelper hours:date];
+    NSInteger minutes = [DateHelper minute:date];
+    _selectHours = (int)hours;
     
-    [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHours:hours])];
-    
-    
-}
--(void)setMinutes:(CGFloat)minutes{
-    _minutes = minutes;
-    self.minutesLabel.text =[NSString stringWithFormat:@"%d",(int)_minutes];
+    self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours];
+    NSString *minutesStr;
+    if(minutes<10){
+        minutesStr = [NSString stringWithFormat:@"0%d",(int)minutes];
+    }else{
+        minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
+    }
+    self.minutesLabel.text = minutesStr;
     [self.minutesView setTransform:CGAffineTransformMakeRotation([self getAnglesWithMinutes:minutes])];
+    [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:_selectHours minutes:minutes])];
+}
+-(void)setDateString:(NSString *)dateString{
+    _dateString = dateString;
     
-    [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:self.hours minutes:minutes])];
+    
 }
 
 #pragma mark - prepare
+- (void)prepareData{
+    self.selectedDate = YES; //默认选中小时
+    self.minutesLabel.alpha = 0.5;
+    self.selectedMorningOrafternoon = YES; //默认选中上午
+    self.afternoonLabel.alpha = 0.5;
+    
+    self.semicolonLabel.text = @":";
+    self.hoursLabel.text = @"11";
+    self.minutesLabel.text = @"40";
+    self.morningLabel.text = @"上午";
+    self.afternoonLabel.text = @"下午";
+}
 - (void)prepareUI {
     
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
@@ -122,12 +120,6 @@
     [self.headerView addSubview:self.minutesLabel];
     [self.headerView addSubview:self.morningLabel];
     [self.headerView addSubview:self.afternoonLabel];
-    
-    self.semicolonLabel.text = @":";
-    self.hoursLabel.text = @"11";
-    self.minutesLabel.text = @"40";
-    self.morningLabel.text = @"上午";
-    self.afternoonLabel.text = @"下午";
     
     [self addSubview:self.clockView];
     [self.clockView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -161,11 +153,11 @@
         make.left.equalTo(self.semicolonLabel.mas_right);
     }];
     [self.morningLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.minutesLabel.mas_centerY);
+        make.bottom.equalTo(self.minutesLabel.mas_centerY).offset(-1.5);
         make.left.equalTo(self.minutesLabel.mas_right).offset(5);
     }];
     [self.afternoonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.minutesLabel.mas_centerY);
+        make.top.equalTo(self.minutesLabel.mas_centerY).offset(1.5);
         make.left.equalTo(self.minutesLabel.mas_right).offset(5);
     }];
     
@@ -241,9 +233,8 @@
     
     [self layoutIfNeeded];
     self.clockView.layer.frame = self.clockView.bounds;
-    _centers = self.clockView.center;
     //画表盘
-    UIBezierPath *cicrle     = [UIBezierPath bezierPathWithArcCenter:_centers
+    UIBezierPath *cicrle     = [UIBezierPath bezierPathWithArcCenter:self.clockView.center
                                                               radius:self.clockRadius
                                                           startAngle:0
                                                             endAngle:2*M_PI
@@ -263,7 +254,7 @@
         CGFloat startAngel = (perAngle * i);
         CGFloat endAngel   = startAngel + perAngle/8;
         
-        UIBezierPath *tickPath = [UIBezierPath bezierPathWithArcCenter:_centers
+        UIBezierPath *tickPath = [UIBezierPath bezierPathWithArcCenter:self.clockView.center
                                                                 radius:self.clockCalibrationRadius
                                                             startAngle:startAngel
                                                               endAngle:endAngel
@@ -297,10 +288,9 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint curP = [touch locationInView:self];
-    CGPoint preP = [touch previousLocationInView:self];
-    
-    NSLog(@"curP====%@",NSStringFromCGPoint(curP));
-    NSLog(@"preP====%@",NSStringFromCGPoint(preP));
+    //    CGPoint preP = [touch previousLocationInView:self];
+    //    NSLog(@"curP====%@",NSStringFromCGPoint(curP));
+    //    NSLog(@"preP====%@",NSStringFromCGPoint(preP));
     
     double angle = [self getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
     
@@ -314,14 +304,26 @@
         double minutesAngle =  angle - [self getAnglesWithHours:(int)hours == 12?0:(int)hours];
         int minutes = (int)[self getMinutesWithAngles:(minutesAngle)*12];
         [self.minutesView setTransform:CGAffineTransformMakeRotation(minutesAngle*12)];
-        self.minutesLabel.text = [NSString stringWithFormat:@"%d",minutes] ;
+        NSString *minutesStr;
+        if(minutes<10){
+            minutesStr = [NSString stringWithFormat:@"0%d",(int)minutes];
+        }else{
+            minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
+        }
+        self.minutesLabel.text = minutesStr;
         
     }
     else{
         int minutes = (int)[self getMinutesWithAngles:angle];
         self.selectMinutes = minutes;
         [self.minutesView setTransform:CGAffineTransformMakeRotation(angle)];
-        self.minutesLabel.text = [NSString stringWithFormat:@"%d",minutes] ;
+        NSString *minutesStr;
+        if(minutes < 10){
+            minutesStr = [NSString stringWithFormat:@"0%d",(int)minutes];
+        }else{
+            minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
+        }
+        self.minutesLabel.text = minutesStr;
         
         //设置时针的偏移 矫正
         [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:self.selectHours minutes:minutes])];
@@ -342,8 +344,7 @@
     CGFloat y = x1 * y2 - x2 * y1;
     CGFloat angle = acos(x/sqrt(x*x+y*y));
     
-    NSLog(@"angle ---- %f",angle);
-    
+    //    NSLog(@"angle ---- %f",angle);
     if (pointC.x < self.clockView.center.x) {
         //以所得角度最大为π，因工程中AB为竖直方向固定，需要得到顺时针角度，最大2π，故添加如下：
         angle = M_PI*2 - angle;
@@ -371,45 +372,41 @@
 }
 //根据角度换算成 小时时间
 -(CGFloat)getHoursWithAngles:(CGFloat)angle {
-    CGFloat oneHours = ((M_PI*2)/12);
     
+    CGFloat oneHours = ((M_PI*2)/12);
     return  (int)(angle / oneHours)==0?12:(int)(angle / oneHours);
 }
 
 //根据角度换算成 分钟时间
 -(CGFloat)getMinutesWithAngles:(CGFloat)angle {
-    CGFloat oneMinutes = ((M_PI*2)/60);
     
+    CGFloat oneMinutes = ((M_PI*2)/60);
     return  (int)(angle / oneMinutes);
 }
-
 
 //事件
 -(void)hoursSelectedAction{
     self.selectedDate = YES;
-    self.minutesLabel.alpha = 0.6;
+    self.minutesLabel.alpha = 0.5;
     self.hoursLabel.alpha = 1;
 }
 -(void)minutesSelectedAction{
     self.selectedDate = NO;
     self.minutesLabel.alpha = 1;
-    self.hoursLabel.alpha = 0.6;
+    self.hoursLabel.alpha = 0.5;
 }
 
 -(void)morningSelectedAction{
     self.selectedMorningOrafternoon = YES;
-    self.afternoonLabel.alpha = 0.6;
+    self.afternoonLabel.alpha = 0.5;
     self.morningLabel.alpha = 1;
     
 }
 -(void)afternoonSelectedAction{
     self.selectedMorningOrafternoon = NO;
     self.afternoonLabel.alpha = 1;
-    self.morningLabel.alpha = 0.6;
+    self.morningLabel.alpha = 0.5;
 }
-
-
-
 
 #pragma -mark 懒加载
 -(UIView *)headerView{
@@ -477,7 +474,7 @@
     if (!_morningLabel) {
         _morningLabel = [[UILabel alloc]init];
         [_morningLabel setTextColor:RGB16(0xffffff)];
-        [_morningLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_morningLabel setFont:[UIFont boldSystemFontOfSize:22]];
         [_morningLabel setTextAlignment:NSTextAlignmentCenter];
         _morningLabel.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(morningSelectedAction)];
@@ -489,7 +486,7 @@
     if (!_afternoonLabel) {
         _afternoonLabel = [[UILabel alloc]init];
         [_afternoonLabel setTextColor:RGB16(0xffffff)];
-        [_afternoonLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_afternoonLabel setFont:[UIFont boldSystemFontOfSize:22]];
         [_afternoonLabel setTextAlignment:NSTextAlignmentCenter];
         _afternoonLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(afternoonSelectedAction)];

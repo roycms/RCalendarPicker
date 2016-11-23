@@ -15,11 +15,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                   clockRadius:(CGFloat)clockRadius
-       clockCalibrationRadius:(CGFloat)clockCalibrationRadius
-                  hoursLength:(CGFloat)hoursLength
-                minutesLength:(CGFloat)minutesLength;
+       clockCalibrationRadius:(CGFloat)clockCalibrationRadius;
 
-@property (nonatomic,assign)CGFloat hours;
-@property (nonatomic,assign)CGFloat minutes;
-@property (nonatomic,assign)CGFloat seconds;
+@property (nonatomic,assign)NSDate *date;
+@property (nonatomic,strong)NSString *dateString;
+
 @end

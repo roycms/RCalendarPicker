@@ -44,11 +44,8 @@
      */
     RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
                                                                     clockRadius:140
-                                                         clockCalibrationRadius:130
-                                                                    hoursLength:60
-                                                                  minutesLength:90];
-    rClockPickerView.hours = 5;
-    rClockPickerView.minutes = 40;
+                                                         clockCalibrationRadius:130];
+    rClockPickerView.date = [NSDate date];
     [self.view addSubview:rClockPickerView];
 
 }
