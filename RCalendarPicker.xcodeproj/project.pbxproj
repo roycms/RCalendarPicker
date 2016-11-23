@@ -10,6 +10,8 @@
 		29BFA9B19BA7124087BEE825 /* libPods-RCalendarPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949047117A078BD89922DEF6 /* libPods-RCalendarPicker.a */; };
 		B0047A031DE5904100CB37C2 /* ClockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0047A021DE5904100CB37C2 /* ClockHelper.m */; };
 		B0047A0E1DE5973600CB37C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0047A101DE5973600CB37C2 /* Localizable.strings */; };
+		B0047A171DE5CEAB00CB37C2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B0047A161DE5CEAB00CB37C2 /* bg.jpg */; };
+		B0047A191DE5CED100CB37C2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0047A181DE5CED100CB37C2 /* logo.png */; };
 		B038DF9D1DDBF12900219F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9C1DDBF12900219F1F /* main.m */; };
 		B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9F1DDBF12900219F1F /* AppDelegate.m */; };
 		B038DFA31DDBF12900219F1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFA21DDBF12900219F1F /* ViewController.m */; };
@@ -56,6 +58,8 @@
 		B0047A131DE5C05300CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		B0047A141DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		B0047A151DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B0047A161DE5CEAB00CB37C2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		B0047A181DE5CED100CB37C2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		B038DF981DDBF12900219F1F /* RCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCalendarPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B038DF9C1DDBF12900219F1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B038DF9E1DDBF12900219F1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 		B05CB9C81DDD404900821BB3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B0047A181DE5CED100CB37C2 /* logo.png */,
+				B0047A161DE5CEAB00CB37C2 /* bg.jpg */,
 				B05CB9C91DDD404900821BB3 /* Preview.gif */,
 			);
 			path = Resource;
@@ -334,6 +340,8 @@
 				B038DFAB1DDBF12900219F1F /* LaunchScreen.storyboard in Resources */,
 				B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */,
 				B038DFA81DDBF12900219F1F /* Assets.xcassets in Resources */,
+				B0047A191DE5CED100CB37C2 /* logo.png in Resources */,
+				B0047A171DE5CEAB00CB37C2 /* bg.jpg in Resources */,
 				B038DFA61DDBF12900219F1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
