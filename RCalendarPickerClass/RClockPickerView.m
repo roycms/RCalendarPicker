@@ -108,8 +108,8 @@
     self.afternoonLabel.alpha = 0.5;
     
     self.semicolonLabel.text = @":";
-    self.morningLabel.text = @"上午";
-    self.afternoonLabel.text = @"下午";
+    self.morningLabel.text = NSLocalizedString(@"AM", nil);
+    self.afternoonLabel.text = NSLocalizedString(@"PM", nil);
 }
 - (void)prepareUI {
     
@@ -186,7 +186,7 @@
     }];
 }
 
-#pragma mark - drawPointer
+#pragma mark - draw
 //绘制 时针和分针
 -(void)drawPointer{
     
@@ -310,7 +310,7 @@
     
 }
 
-
+#pragma -mark 触摸回调
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -369,7 +369,8 @@
 }
 
 
-//事件
+#pragma -mark 事件
+
 -(void)hoursSelectedAction{
     self.selectedDate = YES;
     self.minutesLabel.alpha = 0.5;
@@ -495,7 +496,7 @@
 -(UIButton *)cancelButton {
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
-        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
@@ -505,12 +506,13 @@
 -(UIButton *)okButton {
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
-        [_okButton setTitle:@"OK" forState:UIControlStateNormal];
+        [_okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(okButtonAction)];
         [_okButton addGestureRecognizer:tapGesture];
+        
     }
     return _okButton;
 }

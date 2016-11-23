@@ -42,7 +42,7 @@
     return self;
 }
 
-#pragma mark - pu t
+#pragma mark - put
 
 -(void)updateHeaderViewDate:(NSDate *)date {
     
@@ -51,12 +51,12 @@
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     
     if (self.isZn) {
-        self.monthLabel.text = [NSString stringWithFormat:@"%d月 %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date]];
+        self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],NSLocalizedString(@"month", nil)];
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
     }
     else{
-        self.monthLabel.text = [NSString stringWithFormat:@"%d月",(int)[DateHelper month:date]];
-        self.yearLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper year:date]];
+        self.monthLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper month:date],NSLocalizedString(@"month", nil)];
+        self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],NSLocalizedString(@"Year", nil)];
     }
 }
 -(void)setToday:(NSDate *)today{
@@ -80,20 +80,20 @@
 
 -(void)prepareData{
     
-    self.weekDayTextSupportsArray = @[@"Sunday",
-                                      @"Monday",
-                                      @"Tuesday",
-                                      @"Wednesday",
-                                      @"Thursday",
-                                      @"Friday",
-                                      @"Saturday"];
-    self.weekDayArray = @[@"日",
-                          @"一",
-                          @"二",
-                          @"三",
-                          @"四",
-                          @"五",
-                          @"六"];
+    self.weekDayTextSupportsArray = @[NSLocalizedString(@"Sunday", nil),
+                                      NSLocalizedString(@"Monday", nil),
+                                      NSLocalizedString(@"Tuesday", nil),
+                                      NSLocalizedString(@"Wednesday", nil),
+                                      NSLocalizedString(@"Thursday", nil),
+                                      NSLocalizedString(@"Friday", nil),
+                                      NSLocalizedString(@"Saturday", nil)];
+    self.weekDayArray = @[NSLocalizedString(@"日", nil),
+                          NSLocalizedString(@"一", nil),
+                          NSLocalizedString(@"二", nil),
+                          NSLocalizedString(@"三", nil),
+                          NSLocalizedString(@"四", nil),
+                          NSLocalizedString(@"五", nil),
+                          NSLocalizedString(@"六", nil)];
     
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
@@ -389,7 +389,7 @@
 -(UIButton *)cancelButton {
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
-        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
@@ -399,7 +399,7 @@
 -(UIButton *)okButton {
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
-        [_okButton setTitle:@"OK" forState:UIControlStateNormal];
+        [_okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];

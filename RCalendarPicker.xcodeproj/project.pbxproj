@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29BFA9B19BA7124087BEE825 /* libPods-RCalendarPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949047117A078BD89922DEF6 /* libPods-RCalendarPicker.a */; };
 		B0047A031DE5904100CB37C2 /* ClockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0047A021DE5904100CB37C2 /* ClockHelper.m */; };
+		B0047A0E1DE5973600CB37C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0047A101DE5973600CB37C2 /* Localizable.strings */; };
 		B038DF9D1DDBF12900219F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9C1DDBF12900219F1F /* main.m */; };
 		B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9F1DDBF12900219F1F /* AppDelegate.m */; };
 		B038DFA31DDBF12900219F1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFA21DDBF12900219F1F /* ViewController.m */; };
@@ -47,6 +48,14 @@
 		9A98DB3FC050F6BA34F1F429 /* Pods-RCalendarPicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCalendarPicker.release.xcconfig"; path = "Pods/Target Support Files/Pods-RCalendarPicker/Pods-RCalendarPicker.release.xcconfig"; sourceTree = "<group>"; };
 		B0047A011DE5904100CB37C2 /* ClockHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockHelper.h; sourceTree = "<group>"; };
 		B0047A021DE5904100CB37C2 /* ClockHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockHelper.m; sourceTree = "<group>"; };
+		B0047A0C1DE5971300CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		B0047A0D1DE5971300CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B0047A0F1DE5973600CB37C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B0047A111DE5973700CB37C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B0047A121DE5973800CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B0047A131DE5C05300CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		B0047A141DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B0047A151DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B038DF981DDBF12900219F1F /* RCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCalendarPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B038DF9C1DDBF12900219F1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B038DF9E1DDBF12900219F1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -196,6 +205,7 @@
 				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
 				B0047A011DE5904100CB37C2 /* ClockHelper.h */,
 				B0047A021DE5904100CB37C2 /* ClockHelper.m */,
+				B0047A101DE5973600CB37C2 /* Localizable.strings */,
 			);
 			path = RCalendarPickerClass;
 			sourceTree = "<group>";
@@ -300,6 +310,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = B038DF8F1DDBF12900219F1F;
 			productRefGroup = B038DF991DDBF12900219F1F /* Products */;
@@ -318,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0047A0E1DE5973600CB37C2 /* Localizable.strings in Resources */,
 				B038DFAB1DDBF12900219F1F /* LaunchScreen.storyboard in Resources */,
 				B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */,
 				B038DFA81DDBF12900219F1F /* Assets.xcassets in Resources */,
@@ -437,10 +450,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B0047A101DE5973600CB37C2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0047A0F1DE5973600CB37C2 /* Base */,
+				B0047A111DE5973700CB37C2 /* en */,
+				B0047A121DE5973800CB37C2 /* zh-Hans */,
+				B0047A151DE5C05400CB37C2 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B038DFA41DDBF12900219F1F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B038DFA51DDBF12900219F1F /* Base */,
+				B0047A0C1DE5971300CB37C2 /* zh-Hans */,
+				B0047A131DE5C05300CB37C2 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -449,6 +475,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				B038DFAA1DDBF12900219F1F /* Base */,
+				B0047A0D1DE5971300CB37C2 /* zh-Hans */,
+				B0047A141DE5C05400CB37C2 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -460,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -507,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

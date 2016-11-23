@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-    calendarPicker.isZn = YES; //开启农历
+//    calendarPicker.isZn = YES; //开启农历
     calendarPicker.today = [NSDate date]; //现在时间
     calendarPicker.date = calendarPicker.today; //选择时间
     [self.view addSubview:calendarPicker];

@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  RCalendarPicker
+
+  Created by roycms on 2016/11/23.
+  Copyright © 2016年 roycms. All rights reserved.
+*/
+
+"Cancel" = "Cancel";
+"OK" = "OK";
+
+"Year" = "Year";
+"month" = "Month";
+"day" = "day";
+"Sunday" = "Sunday";
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+
+"AM" = "AM";
+"PM" = "PM";
