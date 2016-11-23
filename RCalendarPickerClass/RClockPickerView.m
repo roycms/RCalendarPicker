@@ -32,6 +32,9 @@
 @property (nonatomic,assign)BOOL selectedDate; // true 小时  false 分钟
 @property (nonatomic,assign)BOOL selectedMorningOrafternoon; // true Morning  false afternoon
 
+@property (nonatomic,assign)int selectHours;
+@property (nonatomic,assign)int selectMinutes;
+
 @property CAShapeLayer *hoursLayer; //时针 Layer
 @property CAShapeLayer *minutesLayer; //分针 Layer
 
@@ -84,6 +87,7 @@
         
         self.selectedMorningOrafternoon = YES;
         self.afternoonLabel.alpha = 0.6;
+        
     }
     return self;
 }
@@ -91,9 +95,11 @@
 #pragma mark - set
 -(void)setHours:(CGFloat)hours{
     _hours = hours;
+    _selectHours = hours;
     self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)_hours];
     
     [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHours:hours])];
+    
     
 }
 -(void)setMinutes:(CGFloat)minutes{
@@ -278,7 +284,14 @@
     }
 }
 
-
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"touchesEnded ~~~~~");
+    //时针整点矫正
+    //    if(self.selectMinutes == 0){
+    //        [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHours:self.selectHours])];
+    //    }
+}
 //触摸时开始移动时调用(移动时会持续调用)
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
@@ -292,12 +305,26 @@
     double angle = [self getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
     
     if (self.selectedDate) {
+        CGFloat hours = [self getHoursWithAngles:angle];
+        self.selectHours = hours;
         [self.hoursView setTransform:CGAffineTransformMakeRotation(angle)];
-        self.hoursLabel.text =[NSString stringWithFormat:@"%d",(int)[self getHoursWithAngles:angle]] ;
+        self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours] ;
+        
+        //设置分针 跟随转动
+        double minutesAngle =  angle - [self getAnglesWithHours:(int)hours == 12?0:(int)hours];
+        int minutes = (int)[self getMinutesWithAngles:(minutesAngle)*12];
+        [self.minutesView setTransform:CGAffineTransformMakeRotation(minutesAngle*12)];
+        self.minutesLabel.text = [NSString stringWithFormat:@"%d",minutes] ;
+        
     }
     else{
+        int minutes = (int)[self getMinutesWithAngles:angle];
+        self.selectMinutes = minutes;
         [self.minutesView setTransform:CGAffineTransformMakeRotation(angle)];
-        self.minutesLabel.text =[NSString stringWithFormat:@"%d",(int)[self getMinutesWithAngles:angle]] ;
+        self.minutesLabel.text = [NSString stringWithFormat:@"%d",minutes] ;
+        
+        //设置时针的偏移 矫正
+        [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:self.selectHours minutes:minutes])];
     }
 }
 
