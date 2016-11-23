@@ -23,7 +23,9 @@ note: MainScreenWidth = 360  MainScreenHeight = 960
 
 # TODO
 
-* 增加时分秒的选择功能
+* 增加年月日时分秒联动选择成功后返回nsdate
+* 增加上下午的判断和参数处理
+* 增加主题定义
 * 增加国际化语言支持
 * 增加选择年月的切换形式
 
