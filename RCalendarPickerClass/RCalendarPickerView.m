@@ -29,6 +29,9 @@
 
 @implementation RCalendarPickerView
 
+-(void)dealloc{
+    NSLog(@"dealloc....");
+}
 #pragma mark - init
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -173,7 +176,6 @@
         make.height.offset(60);
     }];
 
-    
 };
 
 #pragma -mark click
@@ -198,6 +200,12 @@
     [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionTransitionCurlUp animations:^(void) {
         self.date = [DateHelper nextMonth:_date];
     } completion:nil];
+}
+-(void)okButtonAction{
+    if (self.complete) {
+        self.complete([DateHelper day:self.selectDate], [DateHelper month:self.selectDate], [DateHelper year:self.selectDate] ,self.selectDate);
+        [self hide];
+    }
 }
 
 #pragma -mark collectionView delegate
@@ -298,10 +306,6 @@
     self.selectDate = date;
     [self updateHeaderViewDate:date];
     [self.collectionView reloadData];
-    if (self.complete) {
-        self.complete(day, [comp month], [comp year] ,date);
-    }
-    // [self hide]; //选择后是否关闭日历
 }
 
 #pragma -mark 懒加载
@@ -399,6 +403,8 @@
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(okButtonAction)];
+        [_okButton addGestureRecognizer:tapGesture];
         
     }
     return _okButton;

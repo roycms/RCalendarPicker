@@ -10,9 +10,6 @@
 #define kDegreesToRadians(degrees)  ((M_PI * degrees)/ 180)
 
 @interface RClockPickerView()
-@property (nonatomic,assign)CGFloat minutes;
-@property (nonatomic,assign)CGFloat seconds;
-
 @property (nonatomic)CGFloat clockRadius;//表 半径
 @property (nonatomic)CGFloat clockCalibrationRadius;//刻度 半径
 
@@ -39,7 +36,11 @@
 @end
 @implementation RClockPickerView
 
+-(void)dealloc{
+    NSLog(@"dealloc....");
+}
 #pragma mark - init
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
@@ -353,6 +354,7 @@
         }else{
             minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
         }
+        self.selectMinutes = minutes;
         self.minutesLabel.text = minutesStr;
         
     }
@@ -450,6 +452,18 @@
     self.afternoonLabel.alpha = 1;
     self.morningLabel.alpha = 0.5;
 }
+
+-(void)okButtonAction{
+    if (self.complete) {
+        self.complete(self.selectHours,self.selectMinutes,0);
+         [self hide];
+    }
+}
+
+-(void)hide {
+    [self removeFromSuperview];
+}
+
 
 #pragma -mark 懒加载
 -(UIView *)headerView{
@@ -555,7 +569,8 @@
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
-
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(okButtonAction)];
+        [_okButton addGestureRecognizer:tapGesture];
     }
     return _okButton;
 }

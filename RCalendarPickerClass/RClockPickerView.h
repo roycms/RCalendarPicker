@@ -19,5 +19,12 @@
 
 @property (nonatomic,assign)NSDate *date;
 @property (nonatomic,strong)NSString *dateString;
-
+/**
+ 选择时间成功后 complete block
+ */
+@property (nonatomic,copy) void(^complete)(NSInteger hours, NSInteger minutes, NSInteger noon);
+/**
+ 关闭 销毁
+ */
+-(void)hide;
 @end
