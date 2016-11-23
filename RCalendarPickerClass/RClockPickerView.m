@@ -198,15 +198,15 @@
     
     [hoursPointer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(2.6);
-        make.height.offset(self.frame.size.width * 0.26);
-        make.top.equalTo(self.hoursView).offset(80);
+        make.height.offset(self.frame.size.width * 0.24);
+        make.top.equalTo(self.hoursView).offset(85);
         make.centerX.equalTo(self.hoursView);
     }];
     
     [minutesPointer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(1.6);
         make.height.offset(self.frame.size.width * 0.35);
-        make.top.equalTo(self.minutesView).offset(50);
+        make.top.equalTo(self.minutesView).offset(58);
         make.centerX.equalTo(self.minutesView);
     }];
 }
@@ -259,20 +259,46 @@
                                                             startAngle:startAngel
                                                               endAngle:endAngel
                                                              clockwise:YES];
+        
+        UIBezierPath *clockValtickPath = [UIBezierPath bezierPathWithArcCenter:self.clockView.center
+                                                                        radius:self.clockCalibrationRadius-18
+                                                                    startAngle:startAngel
+                                                                      endAngle:endAngel
+                                                                     clockwise:YES];
         CAShapeLayer *perLayer = [CAShapeLayer layer];
         if (i % 5 == 0) {
-            perLayer.strokeColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.30].CGColor;
+            perLayer.strokeColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.26].CGColor;
             perLayer.lineWidth   = 10.f;
             
+            //画刻度值
+            CGPoint point      = [self calculateTextPositonWithArcCenter:self.clockView.center Angle:startAngel];
+            UILabel *clockLabel =[[UILabel alloc] initWithFrame:CGRectMake(point.x - 5, point.y - 5, 25, 25)];
+            int clockVal = i/5 +3;
+            clockLabel.text = [NSString stringWithFormat:@"%d",clockVal>12?clockVal%12:clockVal];
+            clockLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.18];
+            clockLabel.font = [UIFont systemFontOfSize:20];
+            clockLabel.textAlignment = NSTextAlignmentCenter;
+            clockLabel.center = clockValtickPath.currentPoint;
+            [self.clockView addSubview:clockLabel];
+            
+            
         }else{
-            perLayer.strokeColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.12].CGColor;
+            perLayer.strokeColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.10].CGColor;
             perLayer.lineWidth   = 5;
             
         }
-        
         perLayer.path = tickPath.CGPath;
         [self.clockView.layer addSublayer:perLayer];
     }
+    
+}
+
+//默认计算半径135
+- (CGPoint)calculateTextPositonWithArcCenter:(CGPoint)center Angle:(CGFloat)angel {
+    
+    CGFloat x = 135 * cosf(angel);
+    CGFloat y = 135 * sinf(angel);
+    return CGPointMake(center.x + x, center.y - y);
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
