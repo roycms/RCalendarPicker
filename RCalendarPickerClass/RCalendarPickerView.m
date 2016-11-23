@@ -121,7 +121,7 @@
 
     
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(60);
+        make.top.equalTo(self).offset(20);
         make.centerX.equalTo(self);
         make.width.offset(self.frame.size.width * 0.82);
     }];
@@ -253,7 +253,8 @@
             cell.dayLabelTextColor = RGB16(0x5d5d5d);
             //this month 当前月 当前天
             BOOL isThisMonth = [DateHelper month:_date] == [DateHelper month:[NSDate date]];
-            if (day == [DateHelper day:_date] && isThisMonth) {
+            BOOL isThisYear = [DateHelper year:_date] == [DateHelper year:[NSDate date]];
+            if (day == [DateHelper day:_date] && isThisMonth && isThisYear) {
                 cell.isToDay = YES;
                 cell.dayLabelTextColor = RGB16(0xffffff);
             }
@@ -262,10 +263,6 @@
             {
                 cell.isSelected = YES;
             }
-//            if ([_today isEqualToDate:_date]) {
-//            } else if ([_today compare:_date] == NSOrderedAscending) {
-//                cell.dayLabelTextColor = RGB16(0x5d5d5d);
-//            }
         }
     }
     return cell;
@@ -389,7 +386,7 @@
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        [_cancelButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
     }
@@ -399,7 +396,7 @@
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
         [_okButton setTitle:@"OK" forState:UIControlStateNormal];
-        [_okButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
         

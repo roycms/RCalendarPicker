@@ -542,7 +542,7 @@
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        [_cancelButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
     }
@@ -552,7 +552,7 @@
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
         [_okButton setTitle:@"OK" forState:UIControlStateNormal];
-        [_okButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
 
