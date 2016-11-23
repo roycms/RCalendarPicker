@@ -10,6 +10,8 @@
 #define kDegreesToRadians(degrees)  ((M_PI * degrees)/ 180)
 
 @interface RClockPickerView()
+@property (nonatomic,assign)CGFloat minutes;
+@property (nonatomic,assign)CGFloat seconds;
 
 @property (nonatomic)CGFloat clockRadius;//表 半径
 @property (nonatomic)CGFloat clockCalibrationRadius;//刻度 半径
@@ -31,8 +33,8 @@
 @property (nonatomic,assign)int selectHours; //当前选择的 小时
 @property (nonatomic,assign)int selectMinutes; //当前选择的 分钟
 
-@property (nonatomic,assign)CGFloat minutes;
-@property (nonatomic,assign)CGFloat seconds;
+@property (nonatomic,strong)UIButton *cancelButton;
+@property (nonatomic,strong)UIButton *okButton;
 
 @end
 @implementation RClockPickerView
@@ -121,6 +123,9 @@
     [self.headerView addSubview:self.morningLabel];
     [self.headerView addSubview:self.afternoonLabel];
     
+    [self addSubview:self.cancelButton];
+    [self addSubview:self.okButton];
+    
     [self addSubview:self.clockView];
     [self.clockView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headerView.mas_bottom);
@@ -166,6 +171,18 @@
     }];
     [self.minutesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.clockView);
+    }];
+    [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.clockView.mas_bottom);
+        make.right.equalTo(self.clockView.mas_centerX);
+        make.left.equalTo(self.clockView);
+        make.height.offset(60);
+    }];
+    [self.okButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.clockView.mas_bottom);
+        make.left.equalTo(self.clockView.mas_centerX);
+        make.right.equalTo(self.clockView);
+        make.height.offset(60);
     }];
 }
 
@@ -519,6 +536,28 @@
         [_afternoonLabel addGestureRecognizer:tapGesture];
     }
     return _afternoonLabel;
+}
+
+-(UIButton *)cancelButton {
+    if(!_cancelButton){
+        _cancelButton =[[UIButton alloc]init];
+        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_cancelButton setBackgroundColor:[UIColor whiteColor]];
+    }
+    return _cancelButton;
+}
+-(UIButton *)okButton {
+    if(!_okButton){
+        _okButton =[[UIButton alloc]init];
+        [_okButton setTitle:@"OK" forState:UIControlStateNormal];
+        [_okButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_okButton setBackgroundColor:[UIColor whiteColor]];
+
+    }
+    return _okButton;
 }
 
 @end

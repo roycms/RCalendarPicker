@@ -22,6 +22,9 @@
 @property (nonatomic,strong) NSArray *themeArray;
 @property (nonatomic,strong) NSDate *selectDate;
 @property (nonatomic,assign) UIColor *thisTheme;
+
+@property (nonatomic,strong)UIButton *cancelButton;
+@property (nonatomic,strong)UIButton *okButton;
 @end
 
 @implementation RCalendarPickerView
@@ -113,6 +116,10 @@
     [self.headerView addSubview:self.dayLabel];
     [self.headerView addSubview:self.yearLabel];
     
+    [self addSubview:self.cancelButton];
+    [self addSubview:self.okButton];
+
+    
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(60);
         make.centerX.equalTo(self);
@@ -152,6 +159,20 @@
         make.centerX.equalTo(self);
         make.width.height.offset(self.frame.size.width * 0.82);
     }];
+    
+    [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom);
+        make.right.equalTo(self.collectionView.mas_centerX);
+        make.left.equalTo(self.collectionView);
+        make.height.offset(60);
+    }];
+    [self.okButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom);
+        make.left.equalTo(self.collectionView.mas_centerX);
+        make.right.equalTo(self.collectionView);
+        make.height.offset(60);
+    }];
+
     
 };
 
@@ -362,6 +383,28 @@
         
     }
     return _collectionView;
+}
+
+-(UIButton *)cancelButton {
+    if(!_cancelButton){
+        _cancelButton =[[UIButton alloc]init];
+        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_cancelButton setBackgroundColor:[UIColor whiteColor]];
+    }
+    return _cancelButton;
+}
+-(UIButton *)okButton {
+    if(!_okButton){
+        _okButton =[[UIButton alloc]init];
+        [_okButton setTitle:@"OK" forState:UIControlStateNormal];
+        [_okButton setTitleColor:RGB16(0xff4081) forState:UIControlStateNormal];
+        [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
+        [_okButton setBackgroundColor:[UIColor whiteColor]];
+        
+    }
+    return _okButton;
 }
 
 @end
