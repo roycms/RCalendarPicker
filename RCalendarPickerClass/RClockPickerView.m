@@ -7,6 +7,7 @@
 //
 
 #import "RClockPickerView.h"
+#import "ClockHelper.h"
 #define kDegreesToRadians(degrees)  ((M_PI * degrees)/ 180)
 
 @interface RClockPickerView()
@@ -90,8 +91,8 @@
         minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
     }
     self.minutesLabel.text = minutesStr;
-    [self.minutesView setTransform:CGAffineTransformMakeRotation([self getAnglesWithMinutes:minutes])];
-    [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:_selectHours minutes:minutes])];
+    [self.minutesView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithMinutes:minutes])];
+    [self.hoursView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithHoursAndMinutes:_selectHours minutes:minutes])];
 }
 -(void)setDateString:(NSString *)dateString{
     _dateString = dateString;
@@ -107,8 +108,6 @@
     self.afternoonLabel.alpha = 0.5;
     
     self.semicolonLabel.text = @":";
-    self.hoursLabel.text = @"11";
-    self.minutesLabel.text = @"40";
     self.morningLabel.text = @"上午";
     self.afternoonLabel.text = @"下午";
 }
@@ -336,17 +335,17 @@
     //    NSLog(@"curP====%@",NSStringFromCGPoint(curP));
     //    NSLog(@"preP====%@",NSStringFromCGPoint(preP));
     
-    double angle = [self getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
+    double angle = [ClockHelper getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
     
     if (self.selectedDate) {
-        CGFloat hours = [self getHoursWithAngles:angle];
+        CGFloat hours = [ClockHelper getHoursWithAngles:angle];
         self.selectHours = hours;
         [self.hoursView setTransform:CGAffineTransformMakeRotation(angle)];
         self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours] ;
         
         //设置分针 跟随转动
-        double minutesAngle =  angle - [self getAnglesWithHours:(int)hours == 12?0:(int)hours];
-        int minutes = (int)[self getMinutesWithAngles:(minutesAngle)*12];
+        double minutesAngle =  angle - [ClockHelper getAnglesWithHours:(int)hours == 12?0:(int)hours];
+        int minutes = (int)[ClockHelper getMinutesWithAngles:(minutesAngle)*12];
         [self.minutesView setTransform:CGAffineTransformMakeRotation(minutesAngle*12)];
         NSString *minutesStr;
         if(minutes<10){
@@ -359,7 +358,7 @@
         
     }
     else{
-        int minutes = (int)[self getMinutesWithAngles:angle];
+        int minutes = (int)[ClockHelper getMinutesWithAngles:angle];
         self.selectMinutes = minutes;
         [self.minutesView setTransform:CGAffineTransformMakeRotation(angle)];
         NSString *minutesStr;
@@ -371,63 +370,10 @@
         self.minutesLabel.text = minutesStr;
         
         //设置时针的偏移 矫正
-        [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHoursAndMinutes:self.selectHours minutes:minutes])];
+        [self.hoursView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithHoursAndMinutes:self.selectHours minutes:minutes])];
     }
 }
 
-
-//三个点A、B、C，计算ㄥABC
-- (CGFloat)getAnglesWithThreePoint:(CGPoint)pointA
-                            pointB:(CGPoint)pointB
-                            pointC:(CGPoint)pointC
-{
-    CGFloat x1 = pointA.x - pointB.x;
-    CGFloat y1 = pointA.y - pointB.y;
-    CGFloat x2 = pointC.x - pointB.x;
-    CGFloat y2 = pointC.y - pointB.y;
-    CGFloat x = x1 * x2 + y1 * y2;
-    CGFloat y = x1 * y2 - x2 * y1;
-    CGFloat angle = acos(x/sqrt(x*x+y*y));
-    
-    //    NSLog(@"angle ---- %f",angle);
-    if (pointC.x < self.clockView.center.x) {
-        //以所得角度最大为π，因工程中AB为竖直方向固定，需要得到顺时针角度，最大2π，故添加如下：
-        angle = M_PI*2 - angle;
-    }
-    return angle;
-}
-
-//时间转角度 WithHour 整点
--(CGFloat)getAnglesWithHours:(CGFloat)hours{
-    
-    CGFloat angle = (int)hours*((M_PI*2)/12) - ((M_PI*2)/12)/60*((hours-(int)hours)*100);
-    return angle;
-}
-//时间转角度 WithHour 整点+ 分钟偏移
--(CGFloat)getAnglesWithHoursAndMinutes:(CGFloat)hours minutes:(CGFloat)minutes{
-    
-    CGFloat angle = (int)hours*((M_PI*2)/12) - ((M_PI*2)/12)/60*((hours-(int)hours)*100) + ((M_PI*2)/12/60)*minutes;
-    return angle;
-}
-//时间转角度 WithMinutes
--(CGFloat)getAnglesWithMinutes:(CGFloat)minutes{
-    
-    CGFloat angle = minutes*((M_PI*2)/60);
-    return angle;
-}
-//根据角度换算成 小时时间
--(CGFloat)getHoursWithAngles:(CGFloat)angle {
-    
-    CGFloat oneHours = ((M_PI*2)/12);
-    return  (int)(angle / oneHours)==0?12:(int)(angle / oneHours);
-}
-
-//根据角度换算成 分钟时间
--(CGFloat)getMinutesWithAngles:(CGFloat)angle {
-    
-    CGFloat oneMinutes = ((M_PI*2)/60);
-    return  (int)(angle / oneMinutes);
-}
 
 //事件
 -(void)hoursSelectedAction{

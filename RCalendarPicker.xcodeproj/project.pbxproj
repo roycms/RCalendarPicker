@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29BFA9B19BA7124087BEE825 /* libPods-RCalendarPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949047117A078BD89922DEF6 /* libPods-RCalendarPicker.a */; };
+		B0047A031DE5904100CB37C2 /* ClockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0047A021DE5904100CB37C2 /* ClockHelper.m */; };
 		B038DF9D1DDBF12900219F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9C1DDBF12900219F1F /* main.m */; };
 		B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9F1DDBF12900219F1F /* AppDelegate.m */; };
 		B038DFA31DDBF12900219F1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFA21DDBF12900219F1F /* ViewController.m */; };
@@ -44,6 +45,8 @@
 		5B9A931BF5FB2EF330FCC220 /* Pods-RCalendarPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCalendarPicker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RCalendarPicker/Pods-RCalendarPicker.debug.xcconfig"; sourceTree = "<group>"; };
 		949047117A078BD89922DEF6 /* libPods-RCalendarPicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RCalendarPicker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A98DB3FC050F6BA34F1F429 /* Pods-RCalendarPicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCalendarPicker.release.xcconfig"; path = "Pods/Target Support Files/Pods-RCalendarPicker/Pods-RCalendarPicker.release.xcconfig"; sourceTree = "<group>"; };
+		B0047A011DE5904100CB37C2 /* ClockHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockHelper.h; sourceTree = "<group>"; };
+		B0047A021DE5904100CB37C2 /* ClockHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockHelper.m; sourceTree = "<group>"; };
 		B038DF981DDBF12900219F1F /* RCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCalendarPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B038DF9C1DDBF12900219F1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B038DF9E1DDBF12900219F1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -187,10 +190,12 @@
 				B038DFD11DDC017900219F1F /* RCalendarPickerView.m */,
 				B038DFD31DDC039000219F1F /* RCollectionViewCell.h */,
 				B038DFD41DDC039000219F1F /* RCollectionViewCell.m */,
-				B038DFD61DDC0CE600219F1F /* DateHelper.h */,
-				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
 				B0A4D4881DDEFEB2006CAE8C /* RClockPickerView.h */,
 				B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */,
+				B038DFD61DDC0CE600219F1F /* DateHelper.h */,
+				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
+				B0047A011DE5904100CB37C2 /* ClockHelper.h */,
+				B0047A021DE5904100CB37C2 /* ClockHelper.m */,
 			);
 			path = RCalendarPickerClass;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 				B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */,
 				B038DFD21DDC017900219F1F /* RCalendarPickerView.m in Sources */,
 				B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */,
+				B0047A031DE5904100CB37C2 /* ClockHelper.m in Sources */,
 				B0A4D48A1DDEFEB2006CAE8C /* RClockPickerView.m in Sources */,
 				B038DF9D1DDBF12900219F1F /* main.m in Sources */,
 				B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */,
