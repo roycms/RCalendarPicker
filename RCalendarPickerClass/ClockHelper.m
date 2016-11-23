@@ -61,5 +61,11 @@
     CGFloat oneMinutes = ((M_PI*2)/60);
     return  (int)(angle / oneMinutes);
 }
-
+//默认计算半径 105
++ (CGPoint)calculateTextPositonWithArcCenter:(CGPoint)center Angle:(CGFloat)angel {
+    
+    CGFloat x = 105 * cosf(angel);
+    CGFloat y = 105 * sinf(angel);
+    return CGPointMake(center.x + x, center.y - y);
+}
 @end

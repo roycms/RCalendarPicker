@@ -28,7 +28,7 @@
 @end
 
 @implementation RCalendarPickerView
-
+#pragma mark - dealloc
 -(void)dealloc{
     NSLog(@"dealloc....");
 }

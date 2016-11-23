@@ -24,4 +24,5 @@
 
 //根据角度换算成 分钟时间
 + (CGFloat)getMinutesWithAngles:(CGFloat)angle;
++ (CGPoint)calculateTextPositonWithArcCenter:(CGPoint)center Angle:(CGFloat)angel;
 @end

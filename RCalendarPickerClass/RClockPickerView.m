@@ -186,7 +186,7 @@
     }];
 }
 
-
+#pragma mark - drawPointer
 //绘制 时针和分针
 -(void)drawPointer{
     
@@ -288,7 +288,7 @@
             perLayer.lineWidth   = 10.f;
             
             //画刻度值
-            CGPoint point      = [self calculateTextPositonWithArcCenter:self.clockView.center Angle:startAngel];
+            CGPoint point      = [ClockHelper calculateTextPositonWithArcCenter:self.clockView.center Angle:startAngel];
             UILabel *clockLabel =[[UILabel alloc] initWithFrame:CGRectMake(point.x - 5, point.y - 5, 25, 25)];
             int clockVal = i/5 +3;
             clockLabel.text = [NSString stringWithFormat:@"%d",clockVal>12?clockVal%12:clockVal];
@@ -310,13 +310,7 @@
     
 }
 
-//默认计算半径135
-- (CGPoint)calculateTextPositonWithArcCenter:(CGPoint)center Angle:(CGFloat)angel {
-    
-    CGFloat x = 135 * cosf(angel);
-    CGFloat y = 135 * sinf(angel);
-    return CGPointMake(center.x + x, center.y - y);
-}
+
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
