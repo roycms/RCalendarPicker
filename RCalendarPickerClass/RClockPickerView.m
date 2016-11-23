@@ -34,6 +34,14 @@
 @property (nonatomic,strong)UIButton *cancelButton;
 @property (nonatomic,strong)UIButton *okButton;
 
+@property (nonatomic,strong) NSArray *themeArray;
+@property (nonatomic,assign) UIColor *thisTheme;
+
+@property (nonatomic,strong)UIView *hoursPointer;
+@property (nonatomic,strong)UIView *minutesPointer;
+
+@property (nonatomic,strong)CAShapeLayer *shapeLayer;
+
 @end
 @implementation RClockPickerView
 
@@ -111,6 +119,22 @@
     self.semicolonLabel.text = @":";
     self.morningLabel.text = NSLocalizedString(@"AM", nil);
     self.afternoonLabel.text = NSLocalizedString(@"PM", nil);
+    
+    self.themeArray = @[RGB16(0X1abc9c),
+                        RGB16(0X27ae60),
+                        RGB16(0X2980b9),
+                        RGB16(0X2c3e50),
+                        RGB16(0Xf39c12),
+                        RGB16(0Xc0392b),
+                        RGB16(0X7f8c8d),
+                        RGB16(0X8e44ad)];
+    self.thisTheme = self.themeArray[(arc4random() % 8)];
+    
+    self.headerView.backgroundColor = self.thisTheme;
+    
+    [self.hoursPointer setBackgroundColor:self.thisTheme];
+    [self.minutesPointer setBackgroundColor:self.thisTheme];
+    self.shapeLayer.strokeColor   = self.thisTheme.CGColor;
 }
 - (void)prepareUI {
     
@@ -191,37 +215,37 @@
 //绘制 时针和分针
 -(void)drawPointer{
     
-    UIView *hoursPointer = [[UIView alloc]init];
-    UIView *minutesPointer = [[UIView alloc]init];
+    self.hoursPointer = [[UIView alloc]init];
+    self.minutesPointer = [[UIView alloc]init];
     
     self.hoursView.userInteractionEnabled = YES;
     self.minutesView.userInteractionEnabled = YES;
-    hoursPointer.userInteractionEnabled = YES;
-    minutesPointer.userInteractionEnabled = YES;
-    hoursPointer.layer.shouldRasterize = YES;
-    minutesPointer.layer.shouldRasterize = YES;
+    self.hoursPointer.userInteractionEnabled = YES;
+    self.minutesPointer.userInteractionEnabled = YES;
+    self.hoursPointer.layer.shouldRasterize = YES;
+    self.minutesPointer.layer.shouldRasterize = YES;
     
     UITapGestureRecognizer *minutesTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(minutesSelectedAction)];
-    [minutesPointer addGestureRecognizer:minutesTapGesture];
+    [self.minutesPointer addGestureRecognizer:minutesTapGesture];
     
     UITapGestureRecognizer *hoursTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hoursSelectedAction)];
-    [hoursPointer addGestureRecognizer:hoursTapGesture];
+    [self.hoursPointer addGestureRecognizer:hoursTapGesture];
     
-    hoursPointer.alpha = 0.8;
-    minutesPointer.alpha = 0.5;
-    [hoursPointer setBackgroundColor:RGB16(0xff4081)];
-    [minutesPointer setBackgroundColor:RGB16(0xff4081)];
-    [self.hoursView addSubview:hoursPointer];
-    [self.minutesView addSubview:minutesPointer];
+    self.hoursPointer.alpha = 0.8;
+    self.minutesPointer.alpha = 0.5;
+    [self.hoursPointer setBackgroundColor:RGB16(0xff4081)];
+    [self.minutesPointer setBackgroundColor:RGB16(0xff4081)];
+    [self.hoursView addSubview:self.hoursPointer];
+    [self.minutesView addSubview:self.minutesPointer];
     
-    [hoursPointer mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.hoursPointer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(2.6);
         make.height.offset(self.frame.size.width * 0.24);
         make.top.equalTo(self.hoursView).offset(85);
         make.centerX.equalTo(self.hoursView);
     }];
     
-    [minutesPointer mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.minutesPointer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(1.6);
         make.height.offset(self.frame.size.width * 0.35);
         make.top.equalTo(self.minutesView).offset(58);
@@ -237,13 +261,13 @@
                                                           startAngle:0
                                                             endAngle:2*M_PI
                                                            clockwise:YES];
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.lineWidth     = 0.8f;
-    shapeLayer.fillColor     = RGB16(0Xf5f5f5).CGColor;
-    shapeLayer.strokeColor   = RGB16(0xff4081).CGColor;
-    shapeLayer.path          = cicrle.CGPath;
+    self.shapeLayer = [CAShapeLayer layer];
+    self.shapeLayer.lineWidth     = 0.8f;
+    self.shapeLayer.fillColor     = RGB16(0Xf5f5f5).CGColor;
+    self.shapeLayer.strokeColor   = RGB16(0xff4081).CGColor;
+    self.shapeLayer.path          = cicrle.CGPath;
     
-    [self.clockView.layer addSublayer:shapeLayer];
+    [self.clockView.layer addSublayer:self.shapeLayer];
 }
 
 //画表盘和刻度
