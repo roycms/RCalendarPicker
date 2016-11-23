@@ -83,13 +83,8 @@
                             @"九月", @"十月", @"冬月", @"腊月", nil];
     
     NSCalendar *localeCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
-    
     unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    
     NSDateComponents *localeComp = [localeCalendar components:unitFlags fromDate:date];
-    
-    NSLog(@"%d_%d_%d  %@",(int)localeComp.year,(int)localeComp.month,(int)localeComp.day,localeComp.date);
-    
     NSString *m_str = [chineseMonths objectAtIndex:localeComp.month-1];
     return m_str;
 }
@@ -102,13 +97,8 @@
     
     
     NSCalendar *localeCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
-    
     unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    
     NSDateComponents *localeComp = [localeCalendar components:unitFlags fromDate:date];
-    
-    NSLog(@"%d_%d_%d  %@",(int)localeComp.year,(int)localeComp.month,(int)localeComp.day,localeComp.date);
-    
     NSString *d_str = [chineseDays objectAtIndex:localeComp.day-1];
     return d_str;
 }
@@ -122,14 +112,9 @@
                              @"甲辰",   @"乙巳",  @"丙午",  @"丁未",  @"戊申",  @"己酉",  @"庚戌",  @"辛亥",  @"壬子",  @"癸丑",
                              @"甲寅",   @"乙卯",  @"丙辰",  @"丁巳",  @"戊午",  @"己未",  @"庚申",  @"辛酉",  @"壬戌",  @"癸亥", nil];
     NSCalendar *localeCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
-    
     unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    
     NSDateComponents *localeComp = [localeCalendar components:unitFlags fromDate:date];
-    
-    NSLog(@"%d_%d_%d  %@",(int)localeComp.year,(int)localeComp.month,(int)localeComp.day,localeComp.date);
-    
-     NSString *y_str = [chineseYears objectAtIndex:localeComp.year-1];
+    NSString *y_str = [chineseYears objectAtIndex:localeComp.year-1];
     return y_str;
 }
 
