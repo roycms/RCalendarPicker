@@ -82,6 +82,7 @@
     NSInteger hours = [DateHelper hours:date];
     NSInteger minutes = [DateHelper minute:date];
     _selectHours = (int)hours;
+    _selectMinutes = (int)minutes;
     
     self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours];
     NSString *minutesStr;
