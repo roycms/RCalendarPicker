@@ -96,6 +96,15 @@
 + (NSDate *)dateInYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 
 /**
+ Description
+
+ @param date date description
+ @param hours hours description
+ @param minutes minutes description
+ @return return value description
+ */
++ (NSDate *)dateInDate:(NSDate *)date Hours:(NSInteger)hours minutes:(NSInteger)minutes;
+/**
  返回农历的月
 
  @param date date description

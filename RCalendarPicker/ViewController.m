@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "RCalendarPickerView.h"
 #import "RClockPickerView.h"
+#import "DateHelper.h"
+
 @interface ViewController ()
 
 @end
@@ -26,18 +28,23 @@
     [self.view addSubview:calendarPicker];
     
 
-    RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
-                                                                    clockRadius:140
-                                                         clockCalibrationRadius:130];
-    rClockPickerView.date = [NSDate date];
-    rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
-        NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
-        
-    };
+
     
     calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
         NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
-        
+
+        RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
+                                                                        clockRadius:140
+                                                             clockCalibrationRadius:130];
+        rClockPickerView.date = [NSDate date];
+        rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
+            NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
+            
+            NSDate *selectDate = [DateHelper dateInDate:date Hours:hours>12?hours%12:hours minutes:minutes];
+            
+            NSLog(@"selectDate: %@",selectDate);
+            
+        };
         [self.view addSubview:rClockPickerView];
     };
     

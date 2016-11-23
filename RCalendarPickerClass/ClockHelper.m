@@ -12,8 +12,7 @@
 //三个点A、B、C，计算ㄥABC
 + (CGFloat)getAnglesWithThreePoint:(CGPoint)pointA
                             pointB:(CGPoint)pointB
-                            pointC:(CGPoint)pointC
-{
+                            pointC:(CGPoint)pointC {
     CGFloat x1 = pointA.x - pointB.x;
     CGFloat y1 = pointA.y - pointB.y;
     CGFloat x2 = pointC.x - pointB.x;
