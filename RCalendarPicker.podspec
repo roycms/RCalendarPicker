@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = %{
-    AlertView A pop-up framework, Can be simple and convenient to join your project.
+    RCalendarPicker framework, Can be simple and convenient to join your project.
   }
 
   s.homepage     = "https://github.com/roycms/RCalendarPicker"
