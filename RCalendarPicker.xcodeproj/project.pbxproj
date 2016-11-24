@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		29BFA9B19BA7124087BEE825 /* libPods-RCalendarPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949047117A078BD89922DEF6 /* libPods-RCalendarPicker.a */; };
 		B0047A031DE5904100CB37C2 /* ClockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B0047A021DE5904100CB37C2 /* ClockHelper.m */; };
-		B0047A0E1DE5973600CB37C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0047A101DE5973600CB37C2 /* Localizable.strings */; };
 		B0047A171DE5CEAB00CB37C2 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B0047A161DE5CEAB00CB37C2 /* bg.jpg */; };
 		B0047A191DE5CED100CB37C2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B0047A181DE5CED100CB37C2 /* logo.png */; };
+		B02F753B1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings in Resources */ = {isa = PBXBuildFile; fileRef = B02F753D1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings */; };
 		B038DF9D1DDBF12900219F1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9C1DDBF12900219F1F /* main.m */; };
 		B038DFA01DDBF12900219F1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DF9F1DDBF12900219F1F /* AppDelegate.m */; };
 		B038DFA31DDBF12900219F1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFA21DDBF12900219F1F /* ViewController.m */; };
@@ -52,14 +52,14 @@
 		B0047A021DE5904100CB37C2 /* ClockHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockHelper.m; sourceTree = "<group>"; };
 		B0047A0C1DE5971300CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		B0047A0D1DE5971300CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		B0047A0F1DE5973600CB37C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B0047A111DE5973700CB37C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B0047A121DE5973800CB37C2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B0047A131DE5C05300CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		B0047A141DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		B0047A151DE5C05400CB37C2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B0047A161DE5CEAB00CB37C2 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		B0047A181DE5CED100CB37C2 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		B02F753C1DE6960F00C69EE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/RCalendarPickerLanguage.strings; sourceTree = "<group>"; };
+		B02F753E1DE6961000C69EE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCalendarPickerLanguage.strings; sourceTree = "<group>"; };
+		B02F753F1DE6961100C69EE8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RCalendarPickerLanguage.strings"; sourceTree = "<group>"; };
+		B02F75401DE6961200C69EE8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/RCalendarPickerLanguage.strings"; sourceTree = "<group>"; };
 		B038DF981DDBF12900219F1F /* RCalendarPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCalendarPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B038DF9C1DDBF12900219F1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B038DF9E1DDBF12900219F1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				B038DFD71DDC0CE600219F1F /* DateHelper.m */,
 				B0047A011DE5904100CB37C2 /* ClockHelper.h */,
 				B0047A021DE5904100CB37C2 /* ClockHelper.m */,
-				B0047A101DE5973600CB37C2 /* Localizable.strings */,
+				B02F753D1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings */,
 			);
 			path = RCalendarPickerClass;
 			sourceTree = "<group>";
@@ -336,11 +336,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0047A0E1DE5973600CB37C2 /* Localizable.strings in Resources */,
 				B038DFAB1DDBF12900219F1F /* LaunchScreen.storyboard in Resources */,
 				B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */,
 				B038DFA81DDBF12900219F1F /* Assets.xcassets in Resources */,
 				B0047A191DE5CED100CB37C2 /* logo.png in Resources */,
+				B02F753B1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings in Resources */,
 				B0047A171DE5CEAB00CB37C2 /* bg.jpg in Resources */,
 				B038DFA61DDBF12900219F1F /* Main.storyboard in Resources */,
 			);
@@ -458,15 +458,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B0047A101DE5973600CB37C2 /* Localizable.strings */ = {
+		B02F753D1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B0047A0F1DE5973600CB37C2 /* Base */,
-				B0047A111DE5973700CB37C2 /* en */,
-				B0047A121DE5973800CB37C2 /* zh-Hans */,
-				B0047A151DE5C05400CB37C2 /* zh-Hant */,
+				B02F753C1DE6960F00C69EE8 /* Base */,
+				B02F753E1DE6961000C69EE8 /* en */,
+				B02F753F1DE6961100C69EE8 /* zh-Hans */,
+				B02F75401DE6961200C69EE8 /* zh-Hant */,
 			);
-			name = Localizable.strings;
+			name = RCalendarPickerLanguage.strings;
 			sourceTree = "<group>";
 		};
 		B038DFA41DDBF12900219F1F /* Main.storyboard */ = {

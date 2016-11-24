@@ -117,8 +117,8 @@
     self.afternoonLabel.alpha = 0.5;
     
     self.semicolonLabel.text = @":";
-    self.morningLabel.text = NSLocalizedString(@"AM", nil);
-    self.afternoonLabel.text = NSLocalizedString(@"PM", nil);
+    self.morningLabel.text = NSLocalizedStringFromTable(@"AM",@"RCalendarPickerLanguage", nil);
+    self.afternoonLabel.text = NSLocalizedStringFromTable(@"PM",@"RCalendarPickerLanguage", nil);
     
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
@@ -523,7 +523,7 @@
 -(UIButton *)cancelButton {
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
-        [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+        [_cancelButton setTitle:NSLocalizedStringFromTable(@"Cancel",@"RCalendarPickerLanguage", nil) forState:UIControlStateNormal];
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
@@ -535,7 +535,7 @@
 -(UIButton *)okButton {
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
-        [_okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+        [_okButton setTitle:NSLocalizedStringFromTable(@"OK",@"RCalendarPickerLanguage", nil) forState:UIControlStateNormal];
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];

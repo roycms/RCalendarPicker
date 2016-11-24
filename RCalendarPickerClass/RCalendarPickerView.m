@@ -51,12 +51,12 @@
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     
     if (self.isZn) {
-        self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],NSLocalizedString(@"month", nil)];
+        self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],NSLocalizedStringFromTable(@"month",@"RCalendarPickerLanguage", nil)];
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
     }
     else{
-        self.monthLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper month:date],NSLocalizedString(@"month", nil)];
-        self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],NSLocalizedString(@"Year", nil)];
+        self.monthLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper month:date],NSLocalizedStringFromTable(@"month",@"RCalendarPickerLanguage", nil)];
+        self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],NSLocalizedStringFromTable(@"Year",@"RCalendarPickerLanguage", nil)];
     }
 }
 -(void)setToday:(NSDate *)today{
@@ -80,20 +80,20 @@
 
 -(void)prepareData{
     
-    self.weekDayTextSupportsArray = @[NSLocalizedString(@"Sunday", nil),
-                                      NSLocalizedString(@"Monday", nil),
-                                      NSLocalizedString(@"Tuesday", nil),
-                                      NSLocalizedString(@"Wednesday", nil),
-                                      NSLocalizedString(@"Thursday", nil),
-                                      NSLocalizedString(@"Friday", nil),
-                                      NSLocalizedString(@"Saturday", nil)];
-    self.weekDayArray = @[NSLocalizedString(@"日", nil),
-                          NSLocalizedString(@"一", nil),
-                          NSLocalizedString(@"二", nil),
-                          NSLocalizedString(@"三", nil),
-                          NSLocalizedString(@"四", nil),
-                          NSLocalizedString(@"五", nil),
-                          NSLocalizedString(@"六", nil)];
+    self.weekDayTextSupportsArray = @[NSLocalizedStringFromTable(@"Sunday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Monday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Tuesday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Wednesday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Thursday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Friday",@"RCalendarPickerLanguage", nil),
+                                      NSLocalizedStringFromTable(@"Saturday",@"RCalendarPickerLanguage", nil)];
+    self.weekDayArray = @[NSLocalizedStringFromTable(@"日",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"一",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"二",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"三",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"四",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"五",@"RCalendarPickerLanguage", nil),
+                          NSLocalizedStringFromTable(@"六",@"RCalendarPickerLanguage", nil)];
     
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
@@ -399,7 +399,7 @@
 -(UIButton *)cancelButton {
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
-        [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+        [_cancelButton setTitle:NSLocalizedStringFromTable(@"Cancel",@"RCalendarPickerLanguage" ,nil) forState:UIControlStateNormal];
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
@@ -411,7 +411,7 @@
 -(UIButton *)okButton {
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
-        [_okButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+        [_okButton setTitle:NSLocalizedStringFromTable(@"OK",@"RCalendarPickerLanguage", nil) forState:UIControlStateNormal];
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
