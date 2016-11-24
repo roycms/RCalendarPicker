@@ -22,7 +22,97 @@
       <h1>
 <a id="rcalendarpicker" class="anchor" href="#rcalendarpicker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RCalendarPicker</h1>
 
-<p>RCalendarPicker 日历控件 ，日历选择控件，日历，日期选择</p>
+<p>RCalendarPicker Calendar calendar control, select control, calendar, date selection, the clock selection control. 日历控件 ，日历选择控件，日历，日期选择，时钟选择控件</p>
+
+<h1>
+<a id="preview" class="anchor" href="#preview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preview</h1>
+
+<p><img src="https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg" alt="预览1"> 
+<img src="https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg" alt="预览2"></p>
+
+<h1>
+<a id="cocoapods" class="anchor" href="#cocoapods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>cocoapods</h1>
+
+<pre><code>pod 'RCalendarPicker'
+</code></pre>
+
+<h1>
+<a id="use" class="anchor" href="#use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use</h1>
+
+<p>default: MainScreenWidth = 360  MainScreenHeight = 960</p>
+
+<pre><code> RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
+            calendarPicker.today = [NSDate date]; //现在时间
+            calendarPicker.date = calendarPicker.today; //选择时间
+            calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
+                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
+            };
+            [self.view addSubview:calendarPicker];
+</code></pre>
+
+<h1>
+<a id="the-lunar-calendar" class="anchor" href="#the-lunar-calendar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The lunar calendar</h1>
+
+<pre><code>RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
+            calendarPicker.isZn = YES; //开启农历
+            calendarPicker.today = [NSDate date]; //现在时间
+            calendarPicker.date = calendarPicker.today; //选择时间
+            calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
+                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
+            };
+            [self.view addSubview:calendarPicker];
+</code></pre>
+
+<h1>
+<a id="a-clock-dial-effect" class="anchor" href="#a-clock-dial-effect" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A clock dial effect</h1>
+
+<pre><code> RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
+                                                                            clockRadius:140
+                                                                 clockCalibrationRadius:130];
+            rClockPickerView.date = [NSDate date];
+            rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
+                NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
+
+            };
+            [self.view addSubview:rClockPickerView];
+</code></pre>
+
+<h1>
+<a id="calendar--clock--use" class="anchor" href="#calendar--clock--use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>calendar + clock  use</h1>
+
+<pre><code>RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
+            calendarPicker.today = [NSDate date]; //现在时间
+            calendarPicker.date = calendarPicker.today; //选择时间
+            [self.view addSubview:calendarPicker];
+
+            calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
+                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
+
+                RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
+                                                                                clockRadius:140
+                                                                     clockCalibrationRadius:130];
+                rClockPickerView.date = [NSDate date];
+                rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
+                    NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
+
+                    NSDate *selectDate = [DateHelper dateInDate:date Hours:hours&gt;12?hours%12:hours minutes:minutes];
+
+                    NSLog(@"selectDate: %@",selectDate);
+
+                };
+                [self.view addSubview:rClockPickerView];
+            };
+
+</code></pre>
+
+<h1>
+<a id="todo" class="anchor" href="#todo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TODO</h1>
+
+<ul>
+<li>增加上下午的判断和参数处理</li>
+<li>增加主题定义</li>
+<li>增加选择年月的切换形式</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/roycms/RCalendarPicker">Rcalendarpicker</a> is maintained by <a href="https://github.com/roycms">roycms</a>.</span>
