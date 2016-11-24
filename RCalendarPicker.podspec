@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RCalendarPicker"
-  s.version      = "1.0.0"
-  s.summary      = "RCalendarPicker 1.0.0"
+  s.version      = "1.0.1"
+  s.summary      = "RCalendarPicker 1.0.1"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -80,7 +80,7 @@ s.license          = { :type => "MIT", :file => "LICENSE" }
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/roycms/RCalendarPicker.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/roycms/RCalendarPicker.git", :tag => "1.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -137,7 +137,7 @@ s.license          = { :type => "MIT", :file => "LICENSE" }
   # s.dependency "JSONKit", "~> 1.4"
 
 s.dependency "Masonry"
-s.dependency "RGB
+s.dependency "RGB"
 s.ios.deployment_target = '8.0' # minimum SDK with autolayout
 # s.osx.deployment_target = '10.7' # minimum SDK with autolayout
 end
