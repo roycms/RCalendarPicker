@@ -16,6 +16,15 @@ pod 'RCalendarPicker'
 
 # Use 
 
+Introduce the head file
+```
+#import "RCalendarPickerView.h" // The lunar calendar 
+#import "RClockPickerView.h" // A clock dial effect
+#import "DateHelper.h" // Time processing with the help of the class
+```
+
+# calendar 
+
 default: MainScreenWidth = 360  MainScreenHeight = 960
 ```
  RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
@@ -27,7 +36,7 @@ default: MainScreenWidth = 360  MainScreenHeight = 960
             [self.view addSubview:calendarPicker];
 ```
 
-# The lunar calendar 
+# The lunar calendar
 ```
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.isZn = YES; //开启农历
