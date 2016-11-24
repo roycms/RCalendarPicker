@@ -1,11 +1,12 @@
 
 # RCalendarPicker
 
-RCalendarPicker 日历控件 ，日历选择控件，日历，日期选择，时钟选择控件
+RCalendarPicker Calendar calendar control, select control, calendar, date selection, the clock selection control. 日历控件 ，日历选择控件，日历，日期选择，时钟选择控件
 
 # Preview
 
-![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) ![预览2](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg)
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) 
+![预览2](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg)
 
 # cocoapods
 
