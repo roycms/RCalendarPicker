@@ -5,8 +5,7 @@ RCalendarPicker 日历控件 ，日历选择控件，日历，日期选择，时
 
 # Preview
 
-![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg)
-![预览2](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg)
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) ![预览2](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg)
 
 # cocoapods
 
