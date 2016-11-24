@@ -3,6 +3,12 @@
 
 RCalendarPicker Calendar calendar control, select control, calendar, date selection, the clock selection control. 日历控件 ，日历选择控件，日历，日期选择，时钟选择控件
 
+[![CocoaPods](https://img.shields.io/badge/pod-0.0.1-red.svg)](http://cocoapods.org/?q=RCalendarPicker)
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg?maxAge=2592000?style=flat-square)](https://github.com/roycms/RCalendarPicker/blob/master/LICENSE)
+[![email](https://img.shields.io/badge/%20email%20-%20roycms%40qq.com%20-yellowgreen.svg)](mailto:roycms@qq.com)
+[![doc](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-DOC-orange.svg)](https://github.com/roycms/)
+
+
 # Preview
 
 ![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) 
