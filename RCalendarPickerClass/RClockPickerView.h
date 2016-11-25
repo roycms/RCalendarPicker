@@ -10,6 +10,8 @@
 #import "RRGB.h"
 #import "Masonry.h"
 #import "DateHelper.h"
+#define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
+#define MainScreenWidth  ([UIScreen mainScreen].bounds.size.width)
 
 @interface RClockPickerView : UIView
 

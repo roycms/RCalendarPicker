@@ -119,9 +119,7 @@
             break;
         case 2:
         {
-            RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
-                                                                            clockRadius:140
-                                                                 clockCalibrationRadius:130];
+            RClockPickerView *rClockPickerView = [[RClockPickerView alloc]init];
             rClockPickerView.date = [NSDate date];
 //            rClockPickerView.thisTheme =[UIColor blackColor];
 //            rClockPickerView.dateString =@"13:50";

@@ -177,6 +177,10 @@
 }
 - (void)prepareUI {
     
+    if(self.frame.size.width == 0){
+        self.frame = CGRectMake(0, 0, MainScreenWidth, MainScreenHeight);
+    }
+    
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
     CGFloat size = self.frame.size.width * 0.82;
     
