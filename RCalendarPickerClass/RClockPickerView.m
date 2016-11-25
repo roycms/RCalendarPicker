@@ -48,6 +48,13 @@
 -(void)dealloc{}
 #pragma mark - init
 
+
+/**
+ init
+
+ @param frame frame description
+ @return return value description
+ */
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
@@ -63,6 +70,15 @@
     return self;
 }
 
+
+/**
+ 初始化
+ 
+ @param frame frame description
+ @param clockRadius 表盘 圆圈的半径
+ @param clockCalibrationRadius 表盘刻度 圆圈的半径
+ @return return self
+ */
 - (instancetype)initWithFrame:(CGRect)frame
                   clockRadius:(CGFloat)clockRadius
        clockCalibrationRadius:(CGFloat)clockCalibrationRadius
@@ -83,6 +99,13 @@
 }
 
 #pragma mark - set
+
+
+/**
+ date 的set 方法
+
+ @param date date description
+ */
 -(void)setDate:(NSDate *)date{
     _date = date;
     @try {
@@ -96,6 +119,13 @@
         return;
     }
 }
+
+
+/**
+ dateString 的set 方法
+
+ @param dateString dateString description
+ */
 -(void)setDateString:(NSString *)dateString{
     _dateString = dateString;
     
@@ -116,6 +146,12 @@
     }
 }
 
+
+/**
+ 设置主题的 set 方法
+
+ @param thisTheme thisTheme description
+ */
 -(void)setThisTheme:(UIColor *)thisTheme{
     _thisTheme = thisTheme;
     self.headerView.backgroundColor = thisTheme;
@@ -125,6 +161,13 @@
     self.shapeLayer.strokeColor   = thisTheme.CGColor;
 }
 
+
+/**
+ 根据 时 分 更新默认的数据
+
+ @param hours 小时
+ @param minute 分钟
+ */
 -(void)updateDefaultUiViewForHours:(NSInteger)hours minute:(NSInteger)minute{
     _selectHours = (int)hours;
     _selectMinutes = (int)minute;
@@ -149,6 +192,11 @@
 }
 
 #pragma mark - prepare
+
+
+/**
+ 准备初始数据
+ */
 - (void)prepareData{
     self.selectedDate = YES; //默认选中小时
     self.minutesLabel.alpha = 0.5;
@@ -175,6 +223,11 @@
     }
 
 }
+
+
+/**
+ 准备界面UI
+ */
 - (void)prepareUI {
     
     if(self.frame.size.width == 0){
@@ -257,7 +310,11 @@
 }
 
 #pragma mark - draw
-//绘制 时针和分针
+
+/**
+ 绘制 时针和分针
+
+ */
 -(void)drawPointer{
     
     self.hoursPointer = [[UIView alloc]init];
@@ -298,7 +355,10 @@
     }];
 }
 
-//画表盘中心的圆点
+
+/**
+ 画表盘中心的圆点 小圆圈
+ */
 -(void)drawClockCenterLayer{
     
     UIBezierPath *cicrle     = [UIBezierPath bezierPathWithArcCenter:self.clockView.center
@@ -315,7 +375,9 @@
     [self.clockView.layer addSublayer:self.shapeLayer];
 }
 
-//画表盘和刻度
+/**
+ 画表盘和刻度
+ */
 -(void)drawClockLayer{
     
     [self layoutIfNeeded];
@@ -382,9 +444,20 @@
 
 #pragma -mark 触摸回调
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{}
-//触摸时开始移动时调用(移动时会持续调用)
+/**
+ 触摸结束回调
+
+ @param touches touches description
+ @param event event description
+ */
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {}
+
+/**
+ 触摸时开始移动时调用(移动时会持续调用)
+
+ @param touches touches description
+ @param event event description
+ */
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     UITouch *touch = [touches anyObject];
@@ -392,7 +465,6 @@
     //    CGPoint preP = [touch previousLocationInView:self];
     //    NSLog(@"curP====%@",NSStringFromCGPoint(curP));
     //    NSLog(@"preP====%@",NSStringFromCGPoint(preP));
-    
     double angle = [ClockHelper getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
     
     if (self.selectedDate) {
@@ -440,29 +512,46 @@
 
 #pragma -mark 事件
 
+/**
+ 选择 时按钮状态 的事件
+ */
 -(void)hoursSelectedAction{
     self.selectedDate = YES;
     self.minutesLabel.alpha = 0.5;
     self.hoursLabel.alpha = 1;
 }
+
+/**
+ 选择 分按钮状态 的事件
+ */
 -(void)minutesSelectedAction{
     self.selectedDate = NO;
     self.minutesLabel.alpha = 1;
     self.hoursLabel.alpha = 0.5;
 }
 
+/**
+ 选择 上午按钮状态 的事件
+ */
 -(void)morningSelectedAction{
     self.selectedMorningOrafternoon = YES;
     self.afternoonLabel.alpha = 0.5;
     self.morningLabel.alpha = 1;
     
 }
+
+/**
+ 选择 下午按钮状态 的事件
+ */
 -(void)afternoonSelectedAction{
     self.selectedMorningOrafternoon = NO;
     self.afternoonLabel.alpha = 1;
     self.morningLabel.alpha = 0.5;
 }
 
+/**
+ 点击确认按钮的事件
+ */
 -(void)okButtonAction{
     
     if (self.complete) {
@@ -475,6 +564,10 @@
     }
     [self hide];
 }
+
+/**
+ 点击取消按钮的事件
+ */
 -(void)cancelButtonAction{
     
     if (self.cancel) {
@@ -482,6 +575,10 @@
     }
     [self hide];
 }
+
+/**
+ 销毁 self 的方法
+ */
 -(void)hide {
     [self removeFromSuperview];
 }

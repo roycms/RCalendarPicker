@@ -10,21 +10,21 @@
 #import "RCollectionViewCell.h"
 
 @interface RCalendarPickerView()
-@property (nonatomic,strong) UIView *headerView;
-@property (nonatomic,strong) UILabel *weekLabel;
-@property (nonatomic,strong) UILabel *monthLabel;
-@property (nonatomic,strong) UILabel *dayLabel;
-@property (nonatomic,strong) UILabel *yearLabel;
-@property (nonatomic,strong) UICollectionView *collectionView;
-@property (nonatomic,strong) NSArray *weekDayArray;
-@property (nonatomic,strong) NSArray *weekDayTextSupportsArray;
-@property (nonatomic,strong) UILabel *groundColourMonthLabel;
-@property (nonatomic,strong) NSArray *themeArray;
-@property (nonatomic,strong) NSDate *selectDate;
+@property (nonatomic,strong) UIView *headerView;  // view
+@property (nonatomic,strong) UILabel *weekLabel;// 顶部星期
+@property (nonatomic,strong) UILabel *monthLabel;//月
+@property (nonatomic,strong) UILabel *dayLabel;// 日
+@property (nonatomic,strong) UILabel *yearLabel;// 年
+@property (nonatomic,strong) UICollectionView *collectionView;// 日历的collectionView
+@property (nonatomic,strong) NSArray *weekDayArray;// 日历内的星期数据
+@property (nonatomic,strong) NSArray *weekDayTextSupportsArray;// 最顶部选择后的 星期显示数据
+@property (nonatomic,strong) UILabel *groundColourMonthLabel;// 日历 上 浅色的半透明的 很大的月份显示 Label
+@property (nonatomic,strong) NSArray *themeArray;//主体颜色数组
+@property (nonatomic,strong) NSDate *selectDate;//选择后的时间
 
 
-@property (nonatomic,strong)UIButton *cancelButton;
-@property (nonatomic,strong)UIButton *okButton;
+@property (nonatomic,strong)UIButton *cancelButton;//取消按钮
+@property (nonatomic,strong)UIButton *okButton;//确认按钮
 @end
 
 @implementation RCalendarPickerView
@@ -42,12 +42,17 @@
 
 #pragma mark - put
 
+
+/**
+ 根据时间 更新头部显示
+
+ @param date date description
+ */
 -(void)updateHeaderViewDate:(NSDate *)date {
     
     self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)[DateHelper weekday:date] - 1]];
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
-    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
-    
+    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"--%d",(int)[DateHelper month:date]];
     if (self.isLunarCalendar) {
         self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],LANGUAGE(@"month")];
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
@@ -57,11 +62,23 @@
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],LANGUAGE(@"Year")];
     }
 }
+
+/**
+ today set 方法
+
+ @param today today description
+ */
 -(void)setToday:(NSDate *)today{
     
     _today = today;
     [self updateHeaderViewDate:today];
 }
+
+/**
+ date 的set方法
+
+ @param date date description
+ */
 - (void)setDate:(NSDate *)date
 {
     _date = date;
@@ -73,17 +90,31 @@
     [self.collectionView reloadData];
 }
 
+/**
+ 设置主题 的set 方法
+
+ @param thisTheme thisTheme description
+ */
 -(void)setThisTheme:(UIColor *)thisTheme{
     _thisTheme = thisTheme;
     
     [self.headerView setBackgroundColor:thisTheme];
 }
 
+/**
+ 销毁页面方法
+ */
 -(void)hide {
     [self removeFromSuperview];
 }
+
+
 #pragma mark - Layout UI准备和布局相关
 
+
+/**
+ 准备默认数据
+ */
 -(void)prepareData{
     
     self.weekDayTextSupportsArray = @[LANGUAGE(@"Sunday"),
@@ -93,13 +124,13 @@
                                       LANGUAGE(@"Thursday"),
                                       LANGUAGE(@"Friday"),
                                       LANGUAGE(@"Saturday")];
-    self.weekDayArray = @[LANGUAGE(@"日"),
-                          LANGUAGE(@"一"),
-                          LANGUAGE(@"二"),
-                          LANGUAGE(@"三"),
-                          LANGUAGE(@"四"),
-                          LANGUAGE(@"五"),
-                          LANGUAGE(@"六")];
+    self.weekDayArray = @[LANGUAGE(@"Sun"),
+                          LANGUAGE(@"Mon"),
+                          LANGUAGE(@"Tues"),
+                          LANGUAGE(@"Wed"),
+                          LANGUAGE(@"Thur"),
+                          LANGUAGE(@"Fri"),
+                          LANGUAGE(@"Sat")];
     
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
@@ -111,6 +142,10 @@
                         RGB16(0X8e44ad)];
 }
 
+
+/**
+ 准备界面UI
+ */
 - (void)prepareUI{
     
     if(self.frame.size.width == 0){
@@ -192,6 +227,11 @@
 };
 
 #pragma -mark click
+
+
+/**
+ 添加 左右滑动 翻页
+ */
 - (void)prepareSwipe
 {
     UISwipeGestureRecognizer *swipLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nexAction)];
@@ -203,17 +243,30 @@
 }
 
 #pragma -mark click
+
+
+/**
+ 上翻页 事件
+ */
 - (void)previouseAction {
     [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionTransitionCurlDown animations:^(void) {
         self.date = [DateHelper lastMonth:_date];
     } completion:nil];
 }
 
+/**
+ 下翻页 事件方法
+ */
 - (void)nexAction {
     [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionTransitionCurlUp animations:^(void) {
         self.date = [DateHelper nextMonth:_date];
     } completion:nil];
 }
+
+
+/**
+ 确认按钮的点击事件
+ */
 -(void)okButtonAction{
     if (self.complete) {
         if(!self.selectDate){
@@ -227,6 +280,11 @@
     }
     [self hide];
 }
+
+
+/**
+ 取消按钮的点击事件
+ */
 -(void)cancelButtonAction{
     if(!self.cancel){
         NSLog(@"cancel block is nil");
@@ -238,6 +296,7 @@
 
 
 #pragma -mark collectionView delegate
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
@@ -338,6 +397,7 @@
 }
 
 #pragma -mark 懒加载
+
 -(UIView *)headerView{
     if (!_headerView) {
         _headerView = [[UIView alloc]init];

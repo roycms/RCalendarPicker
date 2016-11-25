@@ -19,5 +19,14 @@
 "Friday" = "Friday";
 "Saturday" = "Saturday";
 
+"Sun"="Sun";
+"Mon"="Mon";
+"Tues"="Tues";
+"Wed"="Wed";
+"Thur"="Thur";
+"Fri"="Fri";
+"Sat"="Sat";
+
+
 "AM" = "AM";
 "PM" = "PM";
