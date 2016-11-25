@@ -52,7 +52,7 @@
     
     self.weekLabel.text = [NSString stringWithFormat:@"%@",self.weekDayTextSupportsArray[(int)[DateHelper weekday:date] - 1]];
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
-    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"--%d",(int)[DateHelper month:date]];
+    self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     if (self.isLunarCalendar) {
         self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],LANGUAGE(@"month")];
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
