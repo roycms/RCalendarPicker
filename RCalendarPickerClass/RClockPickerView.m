@@ -420,12 +420,17 @@
 }
 
 -(void)okButtonAction{
+    
     if (self.complete) {
         self.complete(self.selectHours,self.selectMinutes,0);
-         [self hide];
     }
+    [self hide];
 }
 -(void)cancelButtonAction{
+    
+    if (self.cancel) {
+        self.cancel();
+    }
     [self hide];
 }
 -(void)hide {
