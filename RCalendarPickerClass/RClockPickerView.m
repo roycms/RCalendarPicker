@@ -92,6 +92,13 @@
     _selectHours = (int)hours;
     _selectMinutes = (int)minutes;
     
+    if(_selectHours > 12){
+        [self afternoonSelectedAction];
+    }
+    else{
+         [self morningSelectedAction]; //上午
+    }
+    
     self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours];
     NSString *minutesStr;
     if(minutes<10){
@@ -113,8 +120,9 @@
 - (void)prepareData{
     self.selectedDate = YES; //默认选中小时
     self.minutesLabel.alpha = 0.5;
-    self.selectedMorningOrafternoon = YES; //默认选中上午
+    self.selectedMorningOrafternoon = YES; //上午
     self.afternoonLabel.alpha = 0.5;
+    self.morningLabel.alpha = 1;
     
     self.semicolonLabel.text = @":";
     self.morningLabel.text = NSLocalizedStringFromTable(@"AM",@"RCalendarPickerLanguage", nil);
@@ -339,7 +347,7 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"touchesEnded ~~~~~");
+//    NSLog(@"touchesEnded ~~~~~");
     //时针整点矫正
     //    if(self.selectMinutes == 0){
     //        [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHours:self.selectHours])];
@@ -360,8 +368,13 @@
         CGFloat hours = [ClockHelper getHoursWithAngles:angle];
         self.selectHours = hours;
         [self.hoursView setTransform:CGAffineTransformMakeRotation(angle)];
-        self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours] ;
         
+        if(self.selectedMorningOrafternoon){
+            self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours == 12?0:(int)hours] ;
+        }
+        else{
+             self.hoursLabel.text = [NSString stringWithFormat:@"%d",((int)hours+12)==24?12:((int)hours+12)] ;
+        }
         //设置分针 跟随转动
         double minutesAngle =  angle - [ClockHelper getAnglesWithHours:(int)hours == 12?0:(int)hours];
         int minutes = (int)[ClockHelper getMinutesWithAngles:(minutesAngle)*12];
@@ -423,10 +436,10 @@
     
     if (self.complete) {
         if(self.selectedMorningOrafternoon){
-            self.complete(self.selectHours,self.selectMinutes,0);
+            self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes,0);
         }
         else{
-            self.complete((self.selectHours + 12)==24?0:(self.selectHours + 12),self.selectMinutes,1);
+            self.complete((self.selectHours + 12)==24?12:(self.selectHours + 12),self.selectMinutes,1);
         }
     }
     [self hide];
