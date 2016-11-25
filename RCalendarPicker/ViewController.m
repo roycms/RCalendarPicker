@@ -122,6 +122,7 @@
                                                                             clockRadius:140
                                                                  clockCalibrationRadius:130];
             rClockPickerView.date = [NSDate date];
+//            rClockPickerView.dateString =@"13:50";
             rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
                 NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
                 

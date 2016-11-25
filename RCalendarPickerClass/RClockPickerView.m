@@ -87,33 +87,58 @@
 #pragma mark - set
 -(void)setDate:(NSDate *)date{
     _date = date;
-    NSInteger hours = [DateHelper hours:date];
-    NSInteger minutes = [DateHelper minute:date];
+    @try {
+        NSInteger hours = [DateHelper hours:date];
+        NSInteger minute = [DateHelper minute:date];
+        
+        [self updateDefaultUiViewForHours:hours minute:minute];
+    } @catch (NSException *exception) {
+        NSLog(@"获取当前时间出错");
+    } @finally {
+        return;
+    }
+}
+-(void)setDateString:(NSString *)dateString{
+    _dateString = dateString;
+    
+    @try {
+        dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@"."];
+        dateString = [dateString stringByReplacingOccurrencesOfString:@"：" withString:@"."];
+        double date = [dateString doubleValue];
+        
+        NSInteger hours = (int)date;
+        
+        NSInteger minute = (int)((date - hours)*100);
+        
+        [self updateDefaultUiViewForHours:hours minute:minute];
+    } @catch (NSException *exception) {
+        NSLog(@"dateString 格式不正确 例子： 12.01 或者 12:01");
+    } @finally {
+        return;
+    }
+}
+
+-(void)updateDefaultUiViewForHours:(NSInteger)hours minute:(NSInteger)minute{
     _selectHours = (int)hours;
-    _selectMinutes = (int)minutes;
+    _selectMinutes = (int)minute;
     
     if(_selectHours > 12){
         [self afternoonSelectedAction];
     }
     else{
-         [self morningSelectedAction]; //上午
+        [self morningSelectedAction]; //上午
     }
     
     self.hoursLabel.text = [NSString stringWithFormat:@"%d",(int)hours];
     NSString *minutesStr;
-    if(minutes<10){
-        minutesStr = [NSString stringWithFormat:@"0%d",(int)minutes];
+    if(minute<10){
+        minutesStr = [NSString stringWithFormat:@"0%d",(int)minute];
     }else{
-        minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
+        minutesStr = [NSString stringWithFormat:@"%d",(int)minute];
     }
     self.minutesLabel.text = minutesStr;
-    [self.minutesView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithMinutes:minutes])];
-    [self.hoursView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithHoursAndMinutes:_selectHours minutes:minutes])];
-}
--(void)setDateString:(NSString *)dateString{
-    _dateString = dateString;
-    
-    
+    [self.minutesView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithMinutes:minute])];
+    [self.hoursView setTransform:CGAffineTransformMakeRotation([ClockHelper getAnglesWithHoursAndMinutes:_selectHours minutes:minute])];
 }
 
 #pragma mark - prepare
