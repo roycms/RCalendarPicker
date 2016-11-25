@@ -95,6 +95,7 @@
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.today = [NSDate date]; //现在时间
             calendarPicker.date = calendarPicker.today; //选择时间
+//            calendarPicker.thisTheme =[UIColor blackColor];
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
                 NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
             };
@@ -122,6 +123,7 @@
                                                                             clockRadius:140
                                                                  clockCalibrationRadius:130];
             rClockPickerView.date = [NSDate date];
+//            rClockPickerView.thisTheme =[UIColor blackColor];
 //            rClockPickerView.dateString =@"13:50";
             rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
                 NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);

@@ -19,6 +19,7 @@
 
 @property (nonatomic,assign)NSDate *date;
 @property (nonatomic,strong)NSString *dateString;
+@property (nonatomic,assign) UIColor *thisTheme;
 /**
  选择时间成功后 complete block
  */

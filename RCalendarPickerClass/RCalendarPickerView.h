@@ -26,6 +26,7 @@
  */
 @property (nonatomic,strong) NSDate *today;
 
+@property (nonatomic,assign) UIColor *thisTheme;
 /**
  是否开启农历
  */

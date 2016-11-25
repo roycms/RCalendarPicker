@@ -21,7 +21,7 @@
 @property (nonatomic,strong) UILabel *groundColourMonthLabel;
 @property (nonatomic,strong) NSArray *themeArray;
 @property (nonatomic,strong) NSDate *selectDate;
-@property (nonatomic,assign) UIColor *thisTheme;
+
 
 @property (nonatomic,strong)UIButton *cancelButton;
 @property (nonatomic,strong)UIButton *okButton;
@@ -67,10 +67,18 @@
 - (void)setDate:(NSDate *)date
 {
     _date = date;
-    self.thisTheme = self.themeArray[(arc4random() % 8)];
-    [self.headerView setBackgroundColor:self.thisTheme];
+    if(self.thisTheme == nil){
+        self.thisTheme = self.themeArray[(arc4random() % 8)];
+    }
+    
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     [self.collectionView reloadData];
+}
+
+-(void)setThisTheme:(UIColor *)thisTheme{
+    _thisTheme = thisTheme;
+    
+    [self.headerView setBackgroundColor:thisTheme];
 }
 
 -(void)hide {
@@ -108,6 +116,8 @@
 - (void)prepareUI{
     
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    CGFloat width = self.frame.size.width * 0.82;
+    CGFloat topSize = (self.frame.size.height - (235+60+width))/2;
     
     [self addSubview:self.headerView];
     [self addSubview:self.collectionView];
@@ -124,9 +134,10 @@
 
     
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(20);
+        make.top.equalTo(self).offset(topSize);
         make.centerX.equalTo(self);
-        make.width.offset(self.frame.size.width * 0.82);
+        make.width.offset(width);
+        make.height.offset(235);
     }];
     
     [self.weekLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -149,7 +160,7 @@
         make.top.equalTo(self.dayLabel.mas_bottom).offset(-10);
         make.centerX.equalTo(self.headerView);
         make.width.equalTo(self.headerView);
-        make.bottom.equalTo(self.headerView).offset(-15);
+        make.bottom.equalTo(self.headerView).offset(-10);
     }];
     [self.groundColourMonthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headerView.mas_bottom).offset(5);
@@ -160,7 +171,7 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.headerView.mas_bottom);
         make.centerX.equalTo(self);
-        make.width.height.offset(self.frame.size.width * 0.82);
+        make.width.height.offset(width);
     }];
     
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {

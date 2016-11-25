@@ -35,7 +35,7 @@
 @property (nonatomic,strong)UIButton *okButton;
 
 @property (nonatomic,strong) NSArray *themeArray;
-@property (nonatomic,assign) UIColor *thisTheme;
+
 
 @property (nonatomic,strong)UIView *hoursPointer;
 @property (nonatomic,strong)UIView *minutesPointer;
@@ -118,6 +118,15 @@
     }
 }
 
+-(void)setThisTheme:(UIColor *)thisTheme{
+    _thisTheme = thisTheme;
+    self.headerView.backgroundColor = thisTheme;
+    
+    [self.hoursPointer setBackgroundColor:thisTheme];
+    [self.minutesPointer setBackgroundColor:thisTheme];
+    self.shapeLayer.strokeColor   = thisTheme.CGColor;
+}
+
 -(void)updateDefaultUiViewForHours:(NSInteger)hours minute:(NSInteger)minute{
     _selectHours = (int)hours;
     _selectMinutes = (int)minute;
@@ -161,18 +170,17 @@
                         RGB16(0Xc0392b),
                         RGB16(0X7f8c8d),
                         RGB16(0X8e44ad)];
-    self.thisTheme = self.themeArray[(arc4random() % 8)];
-    
-    self.headerView.backgroundColor = self.thisTheme;
-    
-    [self.hoursPointer setBackgroundColor:self.thisTheme];
-    [self.minutesPointer setBackgroundColor:self.thisTheme];
-    self.shapeLayer.strokeColor   = self.thisTheme.CGColor;
+    if(self.thisTheme == nil){
+        self.thisTheme = self.themeArray[(arc4random() % 8)];
+    }
+
 }
 - (void)prepareUI {
     
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
     CGFloat size = self.frame.size.width * 0.82;
+    
+    CGFloat topSize = (self.frame.size.height - (120+60+size))/2;
     
     [self addSubview:self.headerView];
     [self.headerView addSubview:self.semicolonLabel];
@@ -196,7 +204,7 @@
     [self.clockView addSubview:self.minutesView];
     
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(60);
+        make.top.equalTo(self).offset(topSize);
         make.centerX.equalTo(self);
         make.width.offset(size);
         make.height.offset(120);
@@ -242,6 +250,12 @@
         make.right.equalTo(self.clockView);
         make.height.offset(60);
     }];
+    
+    
+    [self layoutIfNeeded];
+    
+    NSLog(@"******* %f",(self.headerView.frame.size.height + self.clockView.frame.size.height+self.cancelButton.frame.size.height));
+    NSLog(@"mainScreen ******* %f",([UIScreen mainScreen].bounds.size.height));
 }
 
 #pragma mark - draw
