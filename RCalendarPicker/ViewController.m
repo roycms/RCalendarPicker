@@ -107,7 +107,7 @@
         {
             
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-            calendarPicker.isZn = YES; //开启农历
+            calendarPicker.isLunarCalendar = YES; //开启农历
             calendarPicker.today = [NSDate date]; //现在时间
             calendarPicker.date = calendarPicker.today; //选择时间
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){

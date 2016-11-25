@@ -50,7 +50,7 @@
     self.dayLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper day:date]];
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
     
-    if (self.isZn) {
+    if (self.isLunarCalendar) {
         self.monthLabel.text = [NSString stringWithFormat:@"%d %@ %@",(int)[DateHelper month:date],[DateHelper getChineseCalendarMonthsWithDate:date],LANGUAGE(@"month")];
         self.yearLabel.text = [NSString stringWithFormat:@"%d %@",(int)[DateHelper year:date],[DateHelper getChineseCalendarYearsWithDate:date]];
     }
@@ -286,7 +286,7 @@
             NSDateComponents *comp = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:_date];
             NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day];
             
-            if (self.isZn) {
+            if (self.isLunarCalendar) {
                  cell.znDay = [DateHelper getChineseCalendarDaysWithDate:date];
             }
             cell.dayLabelTextColor = RGB16(0x5d5d5d);

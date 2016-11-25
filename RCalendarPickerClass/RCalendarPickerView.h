@@ -33,7 +33,7 @@
 /**
  是否开启农历
  */
-@property (nonatomic,assign) BOOL isZn;
+@property (nonatomic,assign) BOOL isLunarCalendar;
 
 /**
  选择日历时间成功后 complete block
