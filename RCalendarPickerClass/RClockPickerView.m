@@ -422,7 +422,12 @@
 -(void)okButtonAction{
     
     if (self.complete) {
-        self.complete(self.selectHours,self.selectMinutes,0);
+        if(self.selectedMorningOrafternoon){
+            self.complete(self.selectHours,self.selectMinutes,0);
+        }
+        else{
+            self.complete((self.selectHours + 12)==24?0:(self.selectHours + 12),self.selectMinutes,1);
+        }
     }
     [self hide];
 }
