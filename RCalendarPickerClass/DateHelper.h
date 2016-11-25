@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define MainScreenHeight ([UIScreen mainScreen].bounds.size.height)
+#define MainScreenWidth  ([UIScreen mainScreen].bounds.size.width)
+#define LANGUAGE(LANValue) NSLocalizedStringFromTable(LANValue,@"RCalendarPickerLanguage", nil)
 @interface DateHelper : NSObject
 
 /**

@@ -46,7 +46,7 @@
 @implementation RClockPickerView
 
 -(void)dealloc{
-    NSLog(@"dealloc....");
+//    NSLog(@"dealloc....");
 }
 #pragma mark - init
 
@@ -159,8 +159,10 @@
     self.morningLabel.alpha = 1;
     
     self.semicolonLabel.text = @":";
-    self.morningLabel.text = NSLocalizedStringFromTable(@"AM",@"RCalendarPickerLanguage", nil);
-    self.afternoonLabel.text = NSLocalizedStringFromTable(@"PM",@"RCalendarPickerLanguage", nil);
+    self.morningLabel.text = LANGUAGE(@"AM");
+    
+    
+    self.afternoonLabel.text = LANGUAGE(@"PM");
     
     self.themeArray = @[RGB16(0X1abc9c),
                         RGB16(0X27ae60),
@@ -254,12 +256,6 @@
         make.right.equalTo(self.clockView);
         make.height.offset(60);
     }];
-    
-    
-    [self layoutIfNeeded];
-    
-    NSLog(@"******* %f",(self.headerView.frame.size.height + self.clockView.frame.size.height+self.cancelButton.frame.size.height));
-    NSLog(@"mainScreen ******* %f",([UIScreen mainScreen].bounds.size.height));
 }
 
 #pragma mark - draw
@@ -589,7 +585,7 @@
 -(UIButton *)cancelButton {
     if(!_cancelButton){
         _cancelButton =[[UIButton alloc]init];
-        [_cancelButton setTitle:NSLocalizedStringFromTable(@"Cancel",@"RCalendarPickerLanguage", nil) forState:UIControlStateNormal];
+        [_cancelButton setTitle:LANGUAGE(@"Cancel") forState:UIControlStateNormal];
         [_cancelButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_cancelButton setBackgroundColor:[UIColor whiteColor]];
@@ -601,7 +597,7 @@
 -(UIButton *)okButton {
     if(!_okButton){
         _okButton =[[UIButton alloc]init];
-        [_okButton setTitle:NSLocalizedStringFromTable(@"OK",@"RCalendarPickerLanguage", nil) forState:UIControlStateNormal];
+        [_okButton setTitle:LANGUAGE(@"OK") forState:UIControlStateNormal];
         [_okButton setTitleColor:RGB16(0x898989) forState:UIControlStateNormal];
         [_okButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [_okButton setBackgroundColor:[UIColor whiteColor]];
