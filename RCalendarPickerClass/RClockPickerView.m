@@ -11,10 +11,10 @@
 #define kDegreesToRadians(degrees)  ((M_PI * degrees)/ 180)
 
 @interface RClockPickerView()
-@property (nonatomic)CGFloat clockRadius;//表 半径
-@property (nonatomic)CGFloat clockCalibrationRadius;//刻度 半径
+@property (nonatomic)CGFloat clockRadius;//表盘 圆圈的半径
+@property (nonatomic)CGFloat clockCalibrationRadius;//表盘刻度 圆圈的半径
 
-@property (nonatomic,strong)UIView *headerView; //头部view
+@property (nonatomic,strong)UIView *headerView; //头部 view
 @property (nonatomic,strong)UILabel *hoursLabel; //时 Label
 @property (nonatomic,strong)UILabel *minutesLabel;//分 Label
 @property (nonatomic,strong)UILabel *semicolonLabel;//时 分 的“:”分隔符
@@ -23,31 +23,29 @@
 
 @property (nonatomic,strong)UIView *clockView; //表盘 view
 @property (nonatomic,strong)UIView *hoursView; //时针 view
-@property (nonatomic,strong)UIView *minutesView; //分针针 view
+@property (nonatomic,strong)UIView *minutesView; //分针 view
 
-@property (nonatomic,assign)BOOL selectedDate; // true 小时  false 分钟
-@property (nonatomic,assign)BOOL selectedMorningOrafternoon; // true Morning  false afternoon
+@property (nonatomic,assign)BOOL selectedDate; // 小时和分钟选中状态 YES 小时  NO 分钟
+@property (nonatomic,assign)BOOL selectedMorningOrafternoon; // 上下午选择状态 YES Morning  NO afternoon
 
 @property (nonatomic,assign)int selectHours; //当前选择的 小时
 @property (nonatomic,assign)int selectMinutes; //当前选择的 分钟
 
-@property (nonatomic,strong)UIButton *cancelButton;
-@property (nonatomic,strong)UIButton *okButton;
+@property (nonatomic,strong)UIButton *cancelButton; //取消按钮
+@property (nonatomic,strong)UIButton *okButton; // 确认按钮
 
-@property (nonatomic,strong) NSArray *themeArray;
+@property (nonatomic,strong) NSArray *themeArray;//主题颜色数组
 
 
-@property (nonatomic,strong)UIView *hoursPointer;
-@property (nonatomic,strong)UIView *minutesPointer;
+@property (nonatomic,strong)UIView *hoursPointer; //时针
+@property (nonatomic,strong)UIView *minutesPointer; //分针
 
-@property (nonatomic,strong)CAShapeLayer *shapeLayer;
+@property (nonatomic,strong)CAShapeLayer *shapeLayer; //表盘中心的小圆圈
 
 @end
 @implementation RClockPickerView
 
--(void)dealloc{
-//    NSLog(@"dealloc....");
-}
+-(void)dealloc{}
 #pragma mark - init
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -385,13 +383,7 @@
 #pragma -mark 触摸回调
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-//    NSLog(@"touchesEnded ~~~~~");
-    //时针整点矫正
-    //    if(self.selectMinutes == 0){
-    //        [self.hoursView setTransform:CGAffineTransformMakeRotation([self getAnglesWithHours:self.selectHours])];
-    //    }
-}
+{}
 //触摸时开始移动时调用(移动时会持续调用)
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     

@@ -11,10 +11,34 @@
 #import "RRGB.h"
 
 @interface RCollectionViewCell : UICollectionViewCell
+
+/**
+ 日
+ */
 @property (nonatomic,strong)NSString *day;
+
+/**
+ 农历 日
+ */
 @property (nonatomic,strong)NSString *znDay;
+
+/**
+ 是否选中
+ */
 @property (nonatomic, assign)BOOL isSelected;
+
+/**
+ 是否是今天
+ */
 @property (nonatomic, assign)BOOL isToDay;
+
+/**
+  day uicolor
+ */
 @property (nonatomic, assign)UIColor *dayLabelTextColor;
+
+/**
+ 日期方格的背景颜色
+ */
 @property (nonatomic, assign)UIColor *bgViewColor;
 @end

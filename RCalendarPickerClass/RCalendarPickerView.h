@@ -30,6 +30,7 @@
  选择器的主题颜色
  */
 @property (nonatomic,assign) UIColor *thisTheme;
+
 /**
  是否开启农历
  */
@@ -43,7 +44,9 @@
 /**
  取消按钮的block
  */
+
 @property (nonatomic,copy) void(^cancel)();
+
 /**
  关闭 销毁日历
  */

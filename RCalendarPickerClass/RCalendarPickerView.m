@@ -29,9 +29,7 @@
 
 @implementation RCalendarPickerView
 #pragma mark - dealloc
--(void)dealloc{
-//    NSLog(@"dealloc....");
-}
+-(void)dealloc{}
 #pragma mark - init
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
