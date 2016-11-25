@@ -221,14 +221,20 @@
         if(!self.selectDate){
             NSLog(@"没有选择日期！默认当前系统时间");
             self.complete([DateHelper day:[NSDate date]], [DateHelper month:[NSDate date]], [DateHelper year:[NSDate date]] ,[NSDate date]);
-            [self hide];
+            
         }else{
         self.complete([DateHelper day:self.selectDate], [DateHelper month:self.selectDate], [DateHelper year:self.selectDate] ,self.selectDate);
-            [self hide];
+           
         }
     }
+    [self hide];
 }
 -(void)cancelButtonAction{
+    if(!self.cancel){
+        NSLog(@"cancel block is nil");
+    }else{
+        self.cancel();
+    }
    [self hide];
 }
 
