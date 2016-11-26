@@ -23,7 +23,7 @@ pod 'RCalendarPicker'
 # Use 
 
 Introduce the head file
-```
+```objective-c
 #import "RCalendarPickerView.h" // The lunar calendar 
 #import "RClockPickerView.h" // A clock dial effect
 #import "DateHelper.h" // Time processing with the help of the class
@@ -32,7 +32,7 @@ Introduce the head file
 # calendar 
 
 default: MainScreenWidth = 360  MainScreenHeight = 960
-```
+```objective-c
  RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.today = [NSDate date]; //现在时间
             calendarPicker.date = calendarPicker.today; //选择时间
@@ -43,19 +43,14 @@ default: MainScreenWidth = 360  MainScreenHeight = 960
 ```
 
 # The lunar calendar
-```
-RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-            calendarPicker.isZn = YES; //开启农历
-            calendarPicker.today = [NSDate date]; //现在时间
-            calendarPicker.date = calendarPicker.today; //选择时间
-            calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
-                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
-            };
-            [self.view addSubview:calendarPicker];
+```objective-c
+RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
+calendarPicker.isLunarCalendar = YES; //开启农历
+
 ```
 
 # A clock dial effect
-```
+```objective-c
  RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
                                                                             clockRadius:140
                                                                  clockCalibrationRadius:130];
@@ -68,7 +63,7 @@ RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:
 ```
 
 # calendar + clock  use
-```
+```objective-c
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.today = [NSDate date]; //现在时间
             calendarPicker.date = calendarPicker.today; //选择时间
