@@ -559,7 +559,14 @@
             self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes,0);
         }
         else{
-            self.complete((self.selectHours + 12)==24?12:(self.selectHours + 12),self.selectMinutes,1);
+            int hours;
+            if(self.selectHours>12){
+                hours = self.selectHours==24?12:self.selectHours;
+            }
+            else{
+                hours = (self.selectHours + 12)==24?12:(self.selectHours + 12);
+            }
+            self.complete(hours,self.selectMinutes,1);
         }
     }
     [self hide];
