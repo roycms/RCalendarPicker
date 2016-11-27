@@ -11,8 +11,8 @@ RCalendarPicker Calendar calendar control, select control, calendar, date select
 
 # Preview
 
-![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar_clock.jpg) 
-
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) 
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg) 
 # cocoapods
 
 ```
