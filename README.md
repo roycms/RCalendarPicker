@@ -18,12 +18,21 @@ RCalendarPicker Calendar calendar control, select control, calendar, date select
 ```
 pod 'RCalendarPicker'
 ```
+# Run 
 
-# Use 
+```
+cd myfinder
+git clone https://github.com/roycms/RCalendarPicker.git
+cd RCalendarPicker
+run pod install 
+xcode open RCalendarPicker.xcworkspace
+```
+
+# Use Introduce file
 
 Introduce the head file
 ```objective-c
-#import "RCalendarPickerView.h" // The lunar calendar 
+#import "RCalendarPickerView.h" // The calendar 
 #import "RClockPickerView.h" // A clock dial effect
 #import "DateHelper.h" // Time processing with the help of the class
 ```
@@ -90,7 +99,5 @@ RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:
 
 # TODO
 
-* 增加上下午的判断和参数处理
-* 增加主题定义
 * 增加选择年月的切换形式
 
