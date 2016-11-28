@@ -62,8 +62,8 @@ calendarPicker.isLunarCalendar = YES; //开启农历
                                                                             clockRadius:140
                                                                  clockCalibrationRadius:130];
             rClockPickerView.date = [NSDate date];
-            rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
-                NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
+            rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
+                NSLog(@"%d-%d-%d   float clockDate:  -%f", (int)hours,(int)minutes,(int)noon,clockDate);
                 
             };
             [self.view addSubview:rClockPickerView];
@@ -82,7 +82,7 @@ RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:
                                                                                 clockRadius:140
                                                                      clockCalibrationRadius:130];
                 rClockPickerView.date = [NSDate date];
-                rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
+                rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
                     NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
                     
                     NSDate *selectDate = [DateHelper dateInDate:date Hours:hours>12?hours%12:hours minutes:minutes];
