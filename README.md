@@ -97,5 +97,6 @@ RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:
 
 # TODO
 
-* 增加选择年月的切换形式
+* [x] 增加选择年月的切换形式
+* [x] Tests
 
