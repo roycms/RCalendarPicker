@@ -23,7 +23,6 @@
 		B038DFD21DDC017900219F1F /* RCalendarPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD11DDC017900219F1F /* RCalendarPickerView.m */; };
 		B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD41DDC039000219F1F /* RCollectionViewCell.m */; };
 		B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD71DDC0CE600219F1F /* DateHelper.m */; };
-		B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */ = {isa = PBXBuildFile; fileRef = B05CB9C91DDD404900821BB3 /* Preview.gif */; };
 		B0A4D48A1DDEFEB2006CAE8C /* RClockPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +81,6 @@
 		B038DFD41DDC039000219F1F /* RCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCollectionViewCell.m; sourceTree = "<group>"; };
 		B038DFD61DDC0CE600219F1F /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		B038DFD71DDC0CE600219F1F /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
-		B05CB9C91DDD404900821BB3 /* Preview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Preview.gif; sourceTree = "<group>"; };
 		B0A4D4881DDEFEB2006CAE8C /* RClockPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RClockPickerView.h; sourceTree = "<group>"; };
 		B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RClockPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,7 +217,6 @@
 			children = (
 				B0047A181DE5CED100CB37C2 /* logo.png */,
 				B0047A161DE5CEAB00CB37C2 /* bg.jpg */,
-				B05CB9C91DDD404900821BB3 /* Preview.gif */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -337,7 +334,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B038DFAB1DDBF12900219F1F /* LaunchScreen.storyboard in Resources */,
-				B05CB9CA1DDD404900821BB3 /* Preview.gif in Resources */,
 				B038DFA81DDBF12900219F1F /* Assets.xcassets in Resources */,
 				B0047A191DE5CED100CB37C2 /* logo.png in Resources */,
 				B02F753B1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings in Resources */,

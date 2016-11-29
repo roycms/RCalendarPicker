@@ -93,8 +93,8 @@
         {
             
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-            calendarPicker.today = [NSDate date]; //现在时间
-            calendarPicker.date = calendarPicker.today; //选择时间
+            
+            calendarPicker.date = [NSDate date]; //选择时间
 //            calendarPicker.thisTheme =[UIColor blackColor];
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
                 NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
@@ -108,8 +108,7 @@
             
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.isLunarCalendar = YES; //开启农历
-            calendarPicker.today = [NSDate date]; //现在时间
-            calendarPicker.date = calendarPicker.today; //选择时间
+            calendarPicker.date = [NSDate date]; //选择时间
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
                 NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
             };
@@ -134,8 +133,7 @@
         case 3:
         {
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
-            calendarPicker.today = [NSDate date]; //现在时间
-            calendarPicker.date = calendarPicker.today; //选择时间
+            calendarPicker.date = [NSDate date]; //选择时间
             [self.view addSubview:calendarPicker];
             
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){

@@ -21,10 +21,7 @@
  */
 @property (nonatomic,strong) NSDate *date;
 
-/**
- 今天
- */
-@property (nonatomic,strong) NSDate *today;
+
 
 /**
  选择器的主题颜色

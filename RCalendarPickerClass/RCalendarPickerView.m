@@ -21,8 +21,6 @@
 @property (nonatomic,strong) UILabel *groundColourMonthLabel;// 日历 上 浅色的半透明的 很大的月份显示 Label
 @property (nonatomic,strong) NSArray *themeArray;//主体颜色数组
 @property (nonatomic,strong) NSDate *selectDate;//选择后的时间
-
-
 @property (nonatomic,strong)UIButton *cancelButton;//取消按钮
 @property (nonatomic,strong)UIButton *okButton;//确认按钮
 @end
@@ -63,16 +61,6 @@
     }
 }
 
-/**
- today set 方法
-
- @param today today description
- */
--(void)setToday:(NSDate *)today{
-    
-    _today = today;
-    [self updateHeaderViewDate:today];
-}
 
 /**
  date 的set方法
@@ -86,7 +74,12 @@
         self.thisTheme = self.themeArray[(arc4random() % 8)];
     }
     
+    if (!self.selectDate) { //第一次进入时 初始选中时间
+        [self updateHeaderViewDate:date];
+    }
+    
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
+   
     [self.collectionView reloadData];
 }
 
@@ -140,6 +133,7 @@
                         RGB16(0Xc0392b),
                         RGB16(0X7f8c8d),
                         RGB16(0X8e44ad)];
+    
 }
 
 
@@ -350,7 +344,7 @@
             //this month 当前月 当前天
             BOOL isThisMonth = [DateHelper month:_date] == [DateHelper month:[NSDate date]];
             BOOL isThisYear = [DateHelper year:_date] == [DateHelper year:[NSDate date]];
-            if (day == [DateHelper day:_date] && isThisMonth && isThisYear) {
+            if (day == [DateHelper day:[NSDate date]] && isThisMonth && isThisYear) {
                 cell.isToDay = YES;
                 cell.dayLabelTextColor = RGB16(0xffffff);
             }
