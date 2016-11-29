@@ -12,7 +12,7 @@
 #import "DateHelper.h"
 
 @interface ViewController ()
-
+@property(nonatomic,strong)NSArray *dataSource;
 @end
 
 @implementation ViewController
@@ -22,6 +22,15 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self UI];
     [self buttonUI];
+    
+    
+    // 读取 date.json 数据
+    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"date" ofType:@"json"];
+    NSData *data=[NSData dataWithContentsOfFile:jsonPath];
+    NSError *error;
+    self.dataSource = [NSJSONSerialization JSONObjectWithData:data
+                                                  options:NSJSONReadingAllowFragments
+                                                    error:&error];
     
 }
 
@@ -95,6 +104,7 @@
             RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             
             calendarPicker.selectDate = [DateHelper lastMonth:[NSDate date]];
+            calendarPicker.dataSource = self.dataSource;
 //            calendarPicker.thisTheme =[UIColor blackColor];
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
                 NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);

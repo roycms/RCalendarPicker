@@ -21,7 +21,11 @@
  */
 
 @property (nonatomic,strong) NSDate *selectDate;
+/**
+ 绑定数据的数据源
+ */
 
+@property (nonatomic,strong) NSArray *dataSource;
 /**
  选择器的主题颜色
  */

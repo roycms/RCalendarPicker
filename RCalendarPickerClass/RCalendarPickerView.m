@@ -95,6 +95,15 @@
 }
 
 /**
+ 绑定数据
+
+ @param dataSource dataSource description
+ */
+-(void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
+}
+
+/**
  销毁页面方法
  */
 -(void)hide {
@@ -311,11 +320,13 @@
     RCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RCollectionViewCell" forIndexPath:indexPath];
     cell.isSelected = NO;
     cell.isToDay = NO;
+    cell.isDataSource = NO;
     cell.bgViewColor = self.thisTheme;
     if (indexPath.section == 0) {
         cell.day = self.weekDayArray[indexPath.row];
         cell.dayLabelTextColor = RGB16(0x6f6f6f);
         cell.znDay = nil;
+        
     } else {
         NSInteger daysInThisMonth = [DateHelper totaldaysInMonth:_date];
         NSInteger firstWeekday = [DateHelper firstWeekdayInThisMonth:_date];
@@ -330,6 +341,7 @@
         }else if (i > firstWeekday + daysInThisMonth - 1){
             cell.day = nil;
             cell.znDay = nil;
+            
         }else{
             day = i - firstWeekday + 1;
             cell.day = [NSString stringWithFormat:@"%i",(int)day];
@@ -353,9 +365,30 @@
             {
                 cell.isSelected = YES;
             }
+            
+            //绑定数据
+            cell.isDataSource = [self isDataSourceObj:date];
+            
         }
     }
     return cell;
+}
+
+-(BOOL)isDataSourceObj:(NSDate *)date {
+    
+    BOOL returnVal = NO;
+    for (NSDictionary *dataSourceObj in self.dataSource) {
+        
+     NSDate *dataSourceDate = [DateHelper getDateForString:dataSourceObj[@"date"] dateFormat:@"yyyy-MM-dd"];
+        if ([DateHelper year:date] == [DateHelper year:dataSourceDate] &&
+            [DateHelper month:date] == [DateHelper month:dataSourceDate] &&
+            [DateHelper day:date] == [DateHelper day:dataSourceDate]
+            ) {
+            returnVal = YES;
+        }
+    }
+    
+    return returnVal;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath

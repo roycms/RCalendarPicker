@@ -26,6 +26,11 @@
  是否选中
  */
 @property (nonatomic, assign)BOOL isSelected;
+/**
+ 该天是否有绑定数据
+ */
+@property (nonatomic, assign)BOOL isDataSource;
+
 
 /**
  是否是今天

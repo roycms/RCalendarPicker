@@ -148,4 +148,19 @@
  @return return value description
  */
 + (NSString*)getChineseCalendarWithDate:(NSDate *)date;
+
+/**
+ 根据字符串返回 nsdate
+ str⏬                                    dateFormat⏬
+ 
+ Tue May 31 18:20:45 +0800 2011  --->>>>  EEE MMM dd HH:mm:ss ZZZZ yyyy
+ 12/23/2015 12点08:03秒           --->>>>  MM/dd/yyyy HH点mm:ss秒
+ 2015-12-26 12:08:03             --->>>>  yyyy-MM-dd HH:mm:ss
+ 2015-12-26                      --->>>>  yyyy-MM-dd
+ 
+ @param str str description
+ @param dateFormat dateFormat description
+ @return return value description
+ */
++ (NSDate *)getDateForString:(NSString *)str dateFormat:(NSString *)dateFormat;
 @end

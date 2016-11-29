@@ -23,6 +23,7 @@
 		B038DFD21DDC017900219F1F /* RCalendarPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD11DDC017900219F1F /* RCalendarPickerView.m */; };
 		B038DFD51DDC039000219F1F /* RCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD41DDC039000219F1F /* RCollectionViewCell.m */; };
 		B038DFD81DDC0CE600219F1F /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B038DFD71DDC0CE600219F1F /* DateHelper.m */; };
+		B05362711DED84BE00587CE6 /* date.json in Resources */ = {isa = PBXBuildFile; fileRef = B05362701DED84BE00587CE6 /* date.json */; };
 		B0A4D48A1DDEFEB2006CAE8C /* RClockPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		B038DFD41DDC039000219F1F /* RCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCollectionViewCell.m; sourceTree = "<group>"; };
 		B038DFD61DDC0CE600219F1F /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		B038DFD71DDC0CE600219F1F /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		B05362701DED84BE00587CE6 /* date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = date.json; sourceTree = "<group>"; };
 		B0A4D4881DDEFEB2006CAE8C /* RClockPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RClockPickerView.h; sourceTree = "<group>"; };
 		B0A4D4891DDEFEB2006CAE8C /* RClockPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RClockPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +156,7 @@
 		B038DF9A1DDBF12900219F1F /* RCalendarPicker */ = {
 			isa = PBXGroup;
 			children = (
+				B05362701DED84BE00587CE6 /* date.json */,
 				B05CB9C81DDD404900821BB3 /* Resource */,
 				B038DF9E1DDBF12900219F1F /* AppDelegate.h */,
 				B038DF9F1DDBF12900219F1F /* AppDelegate.m */,
@@ -338,6 +341,7 @@
 				B0047A191DE5CED100CB37C2 /* logo.png in Resources */,
 				B02F753B1DE6960F00C69EE8 /* RCalendarPickerLanguage.strings in Resources */,
 				B0047A171DE5CEAB00CB37C2 /* bg.jpg in Resources */,
+				B05362711DED84BE00587CE6 /* date.json in Resources */,
 				B038DFA61DDBF12900219F1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

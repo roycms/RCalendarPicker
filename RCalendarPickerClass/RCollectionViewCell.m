@@ -14,6 +14,7 @@
 @property (nonatomic ,strong)UIView *bgView;
 @property (nonatomic ,strong) UILabel *dayLabel;
 @property (nonatomic ,strong) UILabel *znDayLabel;
+@property (nonatomic ,strong) UILabel *dataSourceLabel;
 @end
 @implementation RCollectionViewCell
 
@@ -28,10 +29,17 @@
     [self.contentView addSubview:self.bgView];
     [self.contentView addSubview:self.dayLabel];
     [self.contentView addSubview:self.znDayLabel];
+    [self.contentView addSubview:self.dataSourceLabel];
     
     [self.znDayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.dayLabel).offset(-1);
         make.centerX.equalTo(self.dayLabel);
+    }];
+    
+    [self.dataSourceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.dayLabel).offset(9.5);
+        make.right.equalTo(self.dayLabel).offset(-4.0);
+        make.width.height.offset(9);
     }];
 }
 
@@ -57,6 +65,16 @@
 
 -(void)setDayLabelTextColor:(UIColor *)dayLabelTextColor{
     [self.dayLabel setTextColor:dayLabelTextColor];
+}
+
+-(void)setIsDataSource:(BOOL)isDataSource {
+    _isDataSource = isDataSource;
+    if(isDataSource){
+        self.dataSourceLabel.hidden = NO;
+        self.dataSourceLabel.text = @"";}
+    else{
+        self.dataSourceLabel.hidden = YES;
+    }
 }
 
 -(UIView *)bgView{
@@ -87,5 +105,20 @@
         [_znDayLabel setFont:[UIFont boldSystemFontOfSize:10]];
     }
     return _znDayLabel;
+}
+
+- (UILabel *)dataSourceLabel
+{
+    if (!_dataSourceLabel) {
+        _dataSourceLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _dataSourceLabel.backgroundColor = [UIColor redColor];
+        _dataSourceLabel.alpha = 0.45;
+        [_dataSourceLabel setTextAlignment:NSTextAlignmentCenter];
+        [_dataSourceLabel setTextColor:RGB16(0xffffff)];
+        [_dataSourceLabel setFont:[UIFont boldSystemFontOfSize:8]];
+        [_dataSourceLabel.layer setMasksToBounds:YES];
+        [[_dataSourceLabel layer]setCornerRadius:4.5];//圆角
+    }
+    return _dataSourceLabel;
 }
 @end

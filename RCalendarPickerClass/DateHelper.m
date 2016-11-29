@@ -137,4 +137,12 @@
     return chineseCal_str;  
 }
 
++ (NSDate *)getDateForString:(NSString *)str dateFormat:(NSString *)dateFormat{
+    
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = dateFormat;
+    fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en-US"];
+    return  [fmt dateFromString:str];
+}
+
 @end
