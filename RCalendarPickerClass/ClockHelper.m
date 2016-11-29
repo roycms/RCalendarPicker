@@ -74,4 +74,20 @@
     }
     return fabsf([date floatValue]);
 }
+
++ (BOOL)isPointInViewFor:(CGPoint)point view:(UIView *)view {
+    CGFloat x = view.frame.origin.x;
+    CGFloat y = view.frame.origin.y;
+    CGFloat width = view.frame.size.width;
+    CGFloat height = view.frame.size.height;
+    
+    if((point.x > x && point.x<(x+width))&& (point.y > y && point.y<(y+height)))
+    {
+        return YES;
+    }
+    else{
+        
+        return NO;
+    }
+}
 @end

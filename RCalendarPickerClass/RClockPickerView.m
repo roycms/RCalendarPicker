@@ -467,6 +467,11 @@
     //    NSLog(@"preP====%@",NSStringFromCGPoint(preP));
     double angle = [ClockHelper getAnglesWithThreePoint:self.headerView.center pointB:self.clockView.center pointC:curP];
     
+    //拖动不再表盘区域内时 不做调整 直接 return
+    if(![ClockHelper isPointInViewFor:curP view:self.clockView])
+    {
+        return;
+    }
     if (self.selectedDate) {
         CGFloat hours = [ClockHelper getHoursWithAngles:angle];
         self.selectHours = hours;

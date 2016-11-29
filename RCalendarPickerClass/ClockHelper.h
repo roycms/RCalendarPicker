@@ -81,4 +81,14 @@
  @return return value description
  */
 + (float)getFloatDate:(CGFloat)hours minutes:(CGFloat)minutes;
+
+
+/**
+ 判断一个点是否在 一个view内
+
+ @param point 点
+ @param view view
+ @return return value description
+ */
++ (BOOL)isPointInViewFor:(CGPoint)point view:(UIView *)view;
 @end
