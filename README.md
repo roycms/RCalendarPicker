@@ -50,13 +50,40 @@ default: MainScreenWidth = 360  MainScreenHeight = 960
 ```
 
 # The lunar calendar
+Calendar lunar display forms
 ```objective-c
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
 calendarPicker.isLunarCalendar = YES; //开启农历
 
 ```
 
+# The calendar dataSource
+
+The days in the calendar display when binding event data
+```objective-c
+RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
+calendarPicker.dataSource = self.dataSource;
+```
+
+self.dataSource is test data  for json file
+```json
+[{"date":"2016-11-1","value":1},
+{"date":"2016-11-8","value":1},
+{"date":"2016-11-9","value":1},
+{"date":"2016-11-29","value":1}]
+```
+
+# calendar Theme
+Set the calendar theme colors
+
+```objective-c
+RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
+calendarPicker.thisTheme =[UIColor blackColor]; //设置主题颜色 缺省情况下随机显示
+```
+
 # A clock dial effect
+The effect of a similar watches and clocks, can drag pointer to set a time
+
 ```objective-c
  RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
                                                                             clockRadius:140
@@ -70,6 +97,9 @@ calendarPicker.isLunarCalendar = YES; //开启农历
 ```
 
 # calendar + clock  use
+
+To choose the calendar (date) (month) (year) and the vehicle to choose the combination use of the clock
+
 ```objective-c
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.selectDate = [NSDate date]; //默认被选中时间
