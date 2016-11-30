@@ -10,6 +10,7 @@
 #import "RCollectionViewCell.h"
 
 @interface RCalendarPickerView()
+@property (nonatomic,strong) NSDate *date;
 @property (nonatomic,strong) UIView *headerView;  // view
 @property (nonatomic,strong) UILabel *weekLabel;// 顶部星期
 @property (nonatomic,strong) UILabel *monthLabel;//月
@@ -20,9 +21,8 @@
 @property (nonatomic,strong) NSArray *weekDayTextSupportsArray;// 最顶部选择后的 星期显示数据
 @property (nonatomic,strong) UILabel *groundColourMonthLabel;// 日历 上 浅色的半透明的 很大的月份显示 Label
 @property (nonatomic,strong) NSArray *themeArray;//主体颜色数组
-@property (nonatomic,strong) NSDate *selectDate;//选择后的时间
-@property (nonatomic,strong)UIButton *cancelButton;//取消按钮
-@property (nonatomic,strong)UIButton *okButton;//确认按钮
+@property (nonatomic,strong) UIButton *cancelButton;//取消按钮
+@property (nonatomic,strong) UIButton *okButton;//确认按钮
 @end
 
 @implementation RCalendarPickerView
@@ -73,14 +73,14 @@
     if(self.thisTheme == nil){
         self.thisTheme = self.themeArray[(arc4random() % 8)];
     }
-    
-    if (!self.selectDate) { //第一次进入时 初始选中时间
-        [self updateHeaderViewDate:date];
-    }
-    
     self.groundColourMonthLabel.text = [NSString stringWithFormat:@"%d",(int)[DateHelper month:date]];
-   
     [self.collectionView reloadData];
+}
+
+-(void)setSelectDate:(NSDate *)selectDate{
+    _selectDate = selectDate;
+    self.date = selectDate;
+    [self updateHeaderViewDate:selectDate];
 }
 
 /**
@@ -263,12 +263,12 @@
  */
 -(void)okButtonAction{
     if (self.complete) {
-        if(!self.selectDate){
+        if(!_selectDate){
             NSLog(@"没有选择日期！默认当前系统时间");
             self.complete([DateHelper day:[NSDate date]], [DateHelper month:[NSDate date]], [DateHelper year:[NSDate date]] ,[NSDate date]);
             
         }else{
-        self.complete([DateHelper day:self.selectDate], [DateHelper month:self.selectDate], [DateHelper year:self.selectDate] ,self.selectDate);
+        self.complete([DateHelper day:_selectDate], [DateHelper month:_selectDate], [DateHelper year:_selectDate] ,_selectDate);
            
         }
     }
@@ -349,7 +349,7 @@
                 cell.dayLabelTextColor = RGB16(0xffffff);
             }
             //选择的天
-            if(self.selectDate != nil && day == [DateHelper day:self.selectDate] && [DateHelper month:self.date] == [DateHelper month:self.selectDate])
+            if(_selectDate != nil && day == [DateHelper day:_selectDate] && [DateHelper month:_date] == [DateHelper month:_selectDate]&& [DateHelper year:_date] == [DateHelper year:_selectDate])
             {
                 cell.isSelected = YES;
             }
@@ -377,7 +377,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDateComponents *comp = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:self.date];
+    NSDateComponents *comp = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:_date];
     NSInteger firstWeekday = [DateHelper firstWeekdayInThisMonth:_date];
     
     NSInteger day = 0;
@@ -386,7 +386,6 @@
     
     NSDate *date = [DateHelper dateInYear:[comp year] month:[comp month] day:day];
     self.selectDate = date;
-    [self updateHeaderViewDate:date];
     [self.collectionView reloadData];
 }
 

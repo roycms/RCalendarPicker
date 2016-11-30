@@ -19,9 +19,8 @@
 /**
  选中时间
  */
-@property (nonatomic,strong) NSDate *date;
 
-
+@property (nonatomic,strong) NSDate *selectDate;
 
 /**
  选择器的主题颜色
