@@ -67,10 +67,11 @@ calendarPicker.dataSource = self.dataSource;
 
 self.dataSource is test data  for json file
 ```json
-[{"date":"2016-11-1","value":1},
-{"date":"2016-11-8","value":1},
-{"date":"2016-11-9","value":1},
-{"date":"2016-11-29","value":1}]
+[{"date":"2016-12-1","value":1},
+{"date":"2016-12-3","value":1},
+{"date":"2016-12-7","value":1},
+{"date":"2016-12-19","value":1},
+{"date":"2016-12-29","value":1}]
 ```
 
 ![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png) 
