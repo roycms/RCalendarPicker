@@ -73,6 +73,8 @@ self.dataSource is test data  for json file
 {"date":"2016-11-29","value":1}]
 ```
 
+![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png) 
+
 # calendar Theme
 Set the calendar theme colors
 
