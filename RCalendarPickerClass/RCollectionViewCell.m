@@ -11,7 +11,7 @@
 
 
 @interface RCollectionViewCell()
-@property (nonatomic ,strong)UIView *bgView;
+@property (nonatomic ,strong) UIView  *bgView;
 @property (nonatomic ,strong) UILabel *dayLabel;
 @property (nonatomic ,strong) UILabel *znDayLabel;
 @property (nonatomic ,strong) UILabel *dataSourceLabel;

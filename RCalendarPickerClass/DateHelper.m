@@ -78,13 +78,13 @@
 + (NSDate *)dateInDate:(NSDate *)date Hours:(NSInteger)hours minutes:(NSInteger)minutes {
     
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour |NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
-    dateComponents.year = [self year:date];
-    dateComponents.month = [self month:date];
-    dateComponents.day = [self day:date];
-    dateComponents.hour = hours;
-    dateComponents.minute = minutes;
-    dateComponents.second = 0;
-    
+    dateComponents.year              = [self year:date];
+    dateComponents.month             = [self month:date];
+    dateComponents.day               = [self day:date];
+    dateComponents.hour              = hours;
+    dateComponents.minute            = minutes;
+    dateComponents.second            = 0;
+
     return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
 }
 

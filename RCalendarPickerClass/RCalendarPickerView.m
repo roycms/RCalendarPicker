@@ -10,19 +10,19 @@
 #import "RCollectionViewCell.h"
 
 @interface RCalendarPickerView()
-@property (nonatomic,strong) NSDate *date;
-@property (nonatomic,strong) UIView *headerView;  // view
-@property (nonatomic,strong) UILabel *weekLabel;// 顶部星期
-@property (nonatomic,strong) UILabel *monthLabel;//月
-@property (nonatomic,strong) UILabel *dayLabel;// 日
-@property (nonatomic,strong) UILabel *yearLabel;// 年
+@property (nonatomic,strong) NSDate           *date;
+@property (nonatomic,strong) UIView           *headerView;// view
+@property (nonatomic,strong) UILabel          *weekLabel;// 顶部星期
+@property (nonatomic,strong) UILabel          *monthLabel;//月
+@property (nonatomic,strong) UILabel          *dayLabel;// 日
+@property (nonatomic,strong) UILabel          *yearLabel;// 年
 @property (nonatomic,strong) UICollectionView *collectionView;// 日历的collectionView
-@property (nonatomic,strong) NSArray *weekDayArray;// 日历内的星期数据
-@property (nonatomic,strong) NSArray *weekDayTextSupportsArray;// 最顶部选择后的 星期显示数据
-@property (nonatomic,strong) UILabel *groundColourMonthLabel;// 日历 上 浅色的半透明的 很大的月份显示 Label
-@property (nonatomic,strong) NSArray *themeArray;//主体颜色数组
-@property (nonatomic,strong) UIButton *cancelButton;//取消按钮
-@property (nonatomic,strong) UIButton *okButton;//确认按钮
+@property (nonatomic,strong) NSArray          *weekDayArray;// 日历内的星期数据
+@property (nonatomic,strong) NSArray          *weekDayTextSupportsArray;// 最顶部选择后的 星期显示数据
+@property (nonatomic,strong) UILabel          *groundColourMonthLabel;// 日历 上 浅色的半透明的 很大的月份显示 Label
+@property (nonatomic,strong) NSArray          *themeArray;//主体颜色数组
+@property (nonatomic,strong) UIButton         *cancelButton;//取消按钮
+@property (nonatomic,strong) UIButton         *okButton;//确认按钮
 @end
 
 @implementation RCalendarPickerView
@@ -374,6 +374,12 @@
     return cell;
 }
 
+/**
+ 数据源内是否包含当前的天的 数据标记
+
+ @param date date description
+ @return return value description
+ */
 -(BOOL)isDataSourceObj:(NSDate *)date {
     
     BOOL returnVal = NO;

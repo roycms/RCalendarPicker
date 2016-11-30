@@ -13,12 +13,12 @@
 + (CGFloat)getAnglesWithThreePoint:(CGPoint)pointA
                             pointB:(CGPoint)pointB
                             pointC:(CGPoint)pointC {
-    CGFloat x1 = pointA.x - pointB.x;
-    CGFloat y1 = pointA.y - pointB.y;
-    CGFloat x2 = pointC.x - pointB.x;
-    CGFloat y2 = pointC.y - pointB.y;
-    CGFloat x = x1 * x2 + y1 * y2;
-    CGFloat y = x1 * y2 - x2 * y1;
+    CGFloat x1    = pointA.x - pointB.x;
+    CGFloat y1    = pointA.y - pointB.y;
+    CGFloat x2    = pointC.x - pointB.x;
+    CGFloat y2    = pointC.y - pointB.y;
+    CGFloat x     = x1 * x2 + y1 * y2;
+    CGFloat y     = x1 * y2 - x2 * y1;
     CGFloat angle = acos(x/sqrt(x*x+y*y));
     
     if (pointC.x < pointB.x) {
@@ -76,8 +76,8 @@
 }
 
 + (BOOL)isPointInViewFor:(CGPoint)point view:(UIView *)view {
-    CGFloat x = view.frame.origin.x;
-    CGFloat y = view.frame.origin.y;
+    CGFloat x     = view.frame.origin.x;
+    CGFloat y     = view.frame.origin.y;
     CGFloat width = view.frame.size.width;
     CGFloat height = view.frame.size.height;
     
