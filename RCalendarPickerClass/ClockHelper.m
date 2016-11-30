@@ -64,4 +64,14 @@
     CGFloat y = 105 * sinf(angel);
     return CGPointMake(center.x + x, center.y - y);
 }
+
++ (float)getFloatDate:(CGFloat)hours minutes:(CGFloat)minutes{
+    NSString *date;
+    if(minutes < 10){
+        date = [NSString stringWithFormat:@"%d.0%d",(int)hours,(int)minutes];
+    }else{
+        date = [NSString stringWithFormat:@"%d.%d",(int)hours,(int)minutes];
+    }
+    return fabsf([date floatValue]);
+}
 @end

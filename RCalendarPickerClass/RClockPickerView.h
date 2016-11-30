@@ -48,7 +48,7 @@
 /**
  选择时间成功后 complete block
  */
-@property (nonatomic,copy) void(^complete)(NSInteger hours, NSInteger minutes, NSInteger noon);
+@property (nonatomic,copy) void(^complete)(NSInteger hours, NSInteger minutes, NSInteger noon, float date);
 
 /**
  取消按钮的block

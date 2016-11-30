@@ -122,8 +122,8 @@
             rClockPickerView.date = [NSDate date];
 //            rClockPickerView.thisTheme =[UIColor blackColor];
 //            rClockPickerView.dateString =@"13:50";
-            rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
-                NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
+            rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon ,float date){
+                NSLog(@"%d-%d-%d -%f", (int)hours,(int)minutes,(int)noon,date);
                 
             };
             [self.view addSubview:rClockPickerView];
@@ -143,7 +143,7 @@
                                                                                 clockRadius:140
                                                                      clockCalibrationRadius:130];
                 rClockPickerView.date = [NSDate date];
-                rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon){
+                rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
                     NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
                     
                     NSDate *selectDate = [DateHelper dateInDate:date Hours:hours>12?hours%12:hours minutes:minutes];

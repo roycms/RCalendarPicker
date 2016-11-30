@@ -556,7 +556,7 @@
     
     if (self.complete) {
         if(self.selectedMorningOrafternoon){
-            self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes,0);
+            self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes,0,[ClockHelper getFloatDate:self.selectHours minutes:self.selectMinutes]);
         }
         else{
             int hours;
@@ -566,7 +566,8 @@
             else{
                 hours = (self.selectHours + 12)==24?12:(self.selectHours + 12);
             }
-            self.complete(hours,self.selectMinutes,1);
+
+            self.complete(hours,self.selectMinutes,1,[ClockHelper getFloatDate:hours minutes:self.selectMinutes]);
         }
     }
     [self hide];

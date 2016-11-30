@@ -72,4 +72,13 @@
  @return return value description
  */
 + (CGPoint)calculateTextPositonWithArcCenter:(CGPoint)center Angle:(CGFloat)angel;
+
+/**
+ 返回 float 形式的 时间   格式例  12.05
+
+ @param hours hours description
+ @param minutes minutes description
+ @return return value description
+ */
++ (float)getFloatDate:(CGFloat)hours minutes:(CGFloat)minutes;
 @end
