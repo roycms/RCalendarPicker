@@ -60,6 +60,9 @@ calendarPicker.isLunarCalendar = YES; //开启农历
 # The calendar dataSource
 
 The days in the calendar display when binding event data
+
+![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png) 
+
 ```objective-c
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
 calendarPicker.dataSource = self.dataSource;
@@ -73,8 +76,6 @@ self.dataSource is test data  for json file
 {"date":"2016-12-19","value":1},
 {"date":"2016-12-29","value":1}]
 ```
-
-![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png) 
 
 # calendar Theme
 Set the calendar theme colors
