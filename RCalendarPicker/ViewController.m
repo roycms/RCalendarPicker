@@ -156,7 +156,7 @@
                 rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
                     NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
                     
-                    NSDate *selectDate = [DateHelper dateInDate:date Hours:hours>12?hours%12:hours minutes:minutes];
+                    NSDate *selectDate = [DateHelper dateInDate:date Hours:hours minutes:minutes];
                     
                     NSLog(@"selectDate: %@",selectDate);
                     

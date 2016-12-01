@@ -1,4 +1,4 @@
-![logo](https://roycms.github.io/RCalendarPicker/logo.png) 
+![logo](https://roycms.github.io/RCalendarPicker/logo.png)
 # RCalendarPicker
 
 RCalendarPicker Calendar calendar control, select control, calendar, date selection, the clock selection control. 日历控件 ，日历选择控件，日历，日期选择，时钟选择控件
@@ -11,21 +11,21 @@ RCalendarPicker Calendar calendar control, select control, calendar, date select
 
 # Preview
 
-![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) 
-![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg) 
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg)
+![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg)
 # cocoapods
 > Pod installation failure  Please have a look at issues2 https://github.com/roycms/RCalendarPicker/issues/2
 
 ```
 pod 'RCalendarPicker'
 ```
-# Run 
+# Run
 
 ```
 cd myfinder
 git clone https://github.com/roycms/RCalendarPicker.git
 cd RCalendarPicker
-run pod install 
+run pod install
 xcode open RCalendarPicker.xcworkspace
 ```
 
@@ -33,12 +33,12 @@ xcode open RCalendarPicker.xcworkspace
 
 Introduce the head file
 ```objective-c
-#import "RCalendarPickerView.h" // The calendar 
+#import "RCalendarPickerView.h" // The calendar
 #import "RClockPickerView.h" // A clock dial effect
 #import "DateHelper.h" // Time processing with the help of the class
 ```
 
-# calendar 
+# calendar
 
 default: MainScreenWidth = 360  MainScreenHeight = 960
 ```objective-c
@@ -62,7 +62,7 @@ calendarPicker.isLunarCalendar = YES; //开启农历
 
 The days in the calendar display when binding event data
 
-![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png) 
+![dataSource预览](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/dataSource.png)
 
 ```objective-c
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]init];
@@ -96,7 +96,7 @@ The effect of a similar watches and clocks, can drag pointer to set a time
             rClockPickerView.date = [NSDate date];
             rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
                 NSLog(@"%d-%d-%d   float clockDate:  -%f", (int)hours,(int)minutes,(int)noon,clockDate);
-                
+
             };
             [self.view addSubview:rClockPickerView];
 ```
@@ -109,21 +109,21 @@ To choose the calendar (date) (month) (year) and the vehicle to choose the combi
 RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
             calendarPicker.selectDate = [NSDate date]; //默认被选中时间
             [self.view addSubview:calendarPicker];
-            
+
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
                 NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
-                
+
                 RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
                                                                                 clockRadius:140
                                                                      clockCalibrationRadius:130];
                 rClockPickerView.date = [NSDate date];
                 rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
                     NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
-                    
-                    NSDate *selectDate = [DateHelper dateInDate:date Hours:hours>12?hours%12:hours minutes:minutes];
-                    
+
+                    NSDate *selectDate = [DateHelper dateInDate:date Hours:hours minutes:minutes];
+
                     NSLog(@"selectDate: %@",selectDate);
-                    
+
                 };
                 [self.view addSubview:rClockPickerView];
             };
@@ -152,5 +152,4 @@ In the current UIView sliding gesture of conflicts between the pop-up window wil
 
 # You may encounter problems   
 >[NSDate 8小时问题-没你想的那么简单！](http://www.jianshu.com/p/df41659b06a9)
-
 

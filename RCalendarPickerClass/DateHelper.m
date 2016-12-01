@@ -84,6 +84,7 @@
     dateComponents.hour              = hours;
     dateComponents.minute            = minutes;
     dateComponents.second            = 0;
+    [dateComponents setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
 
     return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
 }
