@@ -23,6 +23,8 @@
 @property (nonatomic,strong) NSArray          *themeArray;//主体颜色数组
 @property (nonatomic,strong) UIButton         *cancelButton;//取消按钮
 @property (nonatomic,strong) UIButton         *okButton;//确认按钮
+
+@property (nonatomic,copy) UIColor* (^themeBlock)();
 @end
 
 @implementation RCalendarPickerView
@@ -90,8 +92,11 @@
  */
 -(void)setThisTheme:(UIColor *)thisTheme{
     _thisTheme = thisTheme;
-    
+
     [self.headerView setBackgroundColor:thisTheme];
+    self.themeBlock =^(){
+        return thisTheme;
+    };
 }
 
 /**
@@ -321,7 +326,7 @@
     cell.isSelected = NO;
     cell.isToDay = NO;
     cell.isDataSource = NO;
-    cell.bgViewColor = self.thisTheme;
+    cell.bgViewColor = _themeBlock();
     if (indexPath.section == 0) {
         cell.day = self.weekDayArray[indexPath.row];
         cell.dayLabelTextColor = RGB16(0x6f6f6f);
