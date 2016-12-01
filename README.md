@@ -128,6 +128,20 @@ RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:
             };
 
 ```
+# pop-up window Gestures conflict bug   
+In the current UIView sliding gesture of conflicts between the pop-up window will open bugs can be directly in the new UIViewController   
+```
+            UIViewController *viewController = [[UIViewController alloc]init];
+            
+            RCalendarPickerView *calendarPicker = [[RCalendarPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)];
+            calendarPicker.selectDate = [NSDate date]; //默认被选中时间
+            [viewController.view addSubview:calendarPicker];
+            calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
+                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
+                  [self.navigationController popViewControllerAnimated:YES];
+            };
+            [self.navigationController pushViewController:viewController animated:YES];
+```
 
 # TODO
 
