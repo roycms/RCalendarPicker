@@ -147,18 +147,20 @@
             [self.view addSubview:calendarPicker];
             
             calendarPicker.complete = ^(NSInteger day, NSInteger month, NSInteger year, NSDate *date){
-                NSLog(@"%d-%d-%d", (int)year,(int)month,(int)day);
+                NSLog(@"北京时间： %d-%d-%d", (int)year,(int)month,(int)day);
                 
                 RClockPickerView *rClockPickerView = [[RClockPickerView alloc]initWithFrame:CGRectMake(0, 0, MainScreenWidth, MainScreenHeight)
                                                                                 clockRadius:140
                                                                      clockCalibrationRadius:130];
                 rClockPickerView.date = [NSDate date];
                 rClockPickerView.complete = ^(NSInteger hours, NSInteger minutes, NSInteger noon,float clockDate){
-                    NSLog(@"%d-%d-%d", (int)hours,(int)minutes,(int)noon);
-                    
+                    NSLog(@"北京时间： %d-%d-%d", (int)hours,(int)minutes,(int)noon);
                     NSDate *selectDate = [DateHelper dateInDate:date Hours:hours minutes:minutes];
-                    
-                    NSLog(@"selectDate: %@",selectDate);
+                    NSLog(@"selectDate 格林尼治时间 +0 : %@",selectDate);
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+                    NSString *dateStr = [dateFormatter stringFromDate:selectDate];
+                    NSLog(@"selectDate  北京时间 +8  : %@",dateStr);
                     
                 };
                 [self.view addSubview:rClockPickerView];

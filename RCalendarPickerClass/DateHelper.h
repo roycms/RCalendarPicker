@@ -117,6 +117,7 @@
  @return return value description
  */
 + (NSDate *)dateInDate:(NSDate *)date Hours:(NSInteger)hours minutes:(NSInteger)minutes;
++ (NSDate *)dateInDate:(NSDate *)date Hours:(NSInteger)hours minutes:(NSInteger)minutes second:(NSInteger)second;
 /**
  返回农历的月
 

@@ -83,9 +83,19 @@
     dateComponents.day               = [self day:date];
     dateComponents.hour              = hours;
     dateComponents.minute            = minutes;
-    dateComponents.second            = 0;
-    [dateComponents setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    dateComponents.second            = 59.999;
 
+    return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+}
++ (NSDate *)dateInDate:(NSDate *)date Hours:(NSInteger)hours minutes:(NSInteger)minutes second:(NSInteger)second {
+    NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour |NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    dateComponents.year              = [self year:date];
+    dateComponents.month             = [self month:date];
+    dateComponents.day               = [self day:date];
+    dateComponents.hour              = hours;
+    dateComponents.minute            = minutes;
+    dateComponents.second            = second;
+    
     return [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
 }
 
