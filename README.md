@@ -146,6 +146,7 @@ In the current UIView sliding gesture of conflicts between the pop-up window wil
 # TODO
 
 * [x] 增加选择年月的切换形式
+* [x] 定义日期的可选择范围
 * [x] Tests
 
 # You may encounter problems   
