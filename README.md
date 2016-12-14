@@ -14,6 +14,7 @@ RCalendarPicker Calendar calendar control, select control, calendar, date select
 ![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/calendar.jpg) 
 ![预览1](https://roycms.github.io/RCalendarPicker/RCalendarPicker/Resource/clock.jpg) 
 # cocoapods
+> Pod installation failure  Please have a look at issues2 https://github.com/roycms/RCalendarPicker/issues/2
 
 ```
 pod 'RCalendarPicker'
