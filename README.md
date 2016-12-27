@@ -18,7 +18,7 @@ RCalendarPicker Calendar calendar control, select control, calendar, date select
 
 ```
 pod 'RCalendarPicker'
-
+---or---
 pod 'RCalendarPicker', :git => 'https://github.com/roycms/RCalendarPicker.git'
 ```
 # Run
