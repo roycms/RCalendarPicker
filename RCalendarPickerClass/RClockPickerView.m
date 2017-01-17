@@ -493,6 +493,10 @@
         }else{
             minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
         }
+        if(minutes >= 60)
+        {
+            minutesStr = @"00";
+        }
         self.selectMinutes = minutes;
         self.minutesLabel.text = minutesStr;
         
@@ -506,6 +510,10 @@
             minutesStr = [NSString stringWithFormat:@"0%d",(int)minutes];
         }else{
             minutesStr = [NSString stringWithFormat:@"%d",(int)minutes];
+        }
+        if(minutes >= 60)
+        {
+            minutesStr = @"00";
         }
         self.minutesLabel.text = minutesStr;
 
