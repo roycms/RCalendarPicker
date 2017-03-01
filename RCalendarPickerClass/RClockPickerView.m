@@ -569,7 +569,7 @@
     
     if (self.complete) {
         if(self.selectedMorningOrafternoon){
-            self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes,0,[ClockHelper getFloatDate:self.selectHours minutes:self.selectMinutes]);
+            self.complete(self.selectHours==12?0:self.selectHours,self.selectMinutes>60?0:self.selectMinutes,0,[ClockHelper getFloatDate:self.selectHours minutes:self.selectMinutes>60?0:self.selectMinutes]);
         }
         else{
             int hours;
@@ -579,8 +579,8 @@
             else{
                 hours = (self.selectHours + 12)==24?12:(self.selectHours + 12);
             }
-
-            self.complete(hours,self.selectMinutes,1,[ClockHelper getFloatDate:hours minutes:self.selectMinutes]);
+            
+            self.complete(hours,self.selectMinutes>60?0:self.selectMinutes,1,[ClockHelper getFloatDate:hours minutes:self.selectMinutes>60?0:self.selectMinutes]);
         }
     }
     [self hide];
